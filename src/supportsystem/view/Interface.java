@@ -4,6 +4,18 @@
  */
 package supportsystem.view;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import supportsystem.dao.ClienteDAO;
+import supportsystem.dao.ProdutoDAO;
+import supportsystem.dao.VendaDAO;
+import supportsystem.dao.VendaDTO;
+import supportsystem.dao.VendedorDAO;
+import supportsystem.models.Cliente;
+import supportsystem.models.Produto;
+import supportsystem.models.Vendedor;
+
 /**
  *
  * @author João
@@ -30,31 +42,56 @@ public class Interface extends javax.swing.JFrame {
         FuncionarioLabel = new javax.swing.JLabel();
         ProdutoLabel = new javax.swing.JLabel();
         ValorVendaLabel = new javax.swing.JLabel();
-        cbxCliente = new javax.swing.JComboBox<>();
-        cbxFuncionario = new javax.swing.JComboBox<>();
-        cbxProduto = new javax.swing.JComboBox<>();
-        tbxQuantidade = new javax.swing.JTextField();
+        cbxCliente = new javax.swing.JComboBox();
+        cbxVendedor = new javax.swing.JComboBox();
+        cbxProduto = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
         btnValidar = new javax.swing.JButton();
+        cbxQtd = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         ClienteLabel.setText("Cliente:");
 
-        FuncionarioLabel.setText("Funcionário:");
+        FuncionarioLabel.setText("Vendedor:");
 
         ProdutoLabel.setText("Produto:");
 
         ValorVendaLabel.setText("Quantidade: ");
 
-        cbxCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cbxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        cbxCliente.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbxClienteAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
-        cbxFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cbxVendedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        cbxVendedor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbxVendedorAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
-        cbxProduto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
-        tbxQuantidade.setToolTipText("");
+        cbxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        cbxProduto.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbxProdutoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -64,12 +101,27 @@ public class Interface extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Cliente", "Funcionário", "Produto", "Quantidade"
+                "Cliente", "Vendedor", "Produto", "Quantidade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(Table);
 
         btnValidar.setText("Ok");
+        btnValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarActionPerformed(evt);
+            }
+        });
+
+        cbxQtd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,12 +135,12 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(FuncionarioLabel)
                     .addComponent(ClienteLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tbxQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValidar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnValidar)
+                    .addComponent(cbxQtd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
@@ -105,7 +157,7 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FuncionarioLabel)
-                            .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ProdutoLabel)
@@ -113,7 +165,7 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ValorVendaLabel)
-                            .addComponent(tbxQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addComponent(btnValidar))
                     .addGroup(layout.createSequentialGroup()
@@ -125,6 +177,73 @@ public class Interface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbxProdutoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxProdutoAncestorAdded
+
+        ProdutoDAO dao = new ProdutoDAO();
+        cbxProduto.removeAll();
+        try {
+            for (Produto p : dao.listarProduto()) {
+                cbxProduto.addItem(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbxProdutoAncestorAdded
+
+    private void cbxClienteAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxClienteAncestorAdded
+        ClienteDAO dao = new ClienteDAO();
+        cbxCliente.removeAll();
+
+        try {
+            for (Cliente c : dao.listarClientes()) {
+                cbxCliente.addItem(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbxClienteAncestorAdded
+
+    private void cbxVendedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxVendedorAncestorAdded
+        VendedorDAO dao = new VendedorDAO();
+        cbxVendedor.removeAll();
+
+        try {
+            for (Vendedor v : dao.listarVendedores()) {
+                cbxVendedor.addItem(v);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbxVendedorAncestorAdded
+
+    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+        String nome_cliente;
+        String nome_vendedor;
+        String nome_item;
+        int preco_item;
+        int qtd;
+
+        nome_cliente = (String)cbxCliente.getSelectedItem();
+        nome_vendedor = (String) cbxVendedor.getSelectedItem();
+        nome_item = (String) cbxProduto.getSelectedItem();
+        preco_item = (int) cbxProduto.getSelectedItem();
+        qtd = (int) cbxQtd.getSelectedItem();
+        
+        VendaDTO vendadto = new VendaDTO();
+        
+        vendadto.setNome_cliente(nome_cliente);
+        vendadto.setNome_vendedor(nome_vendedor);
+        vendadto.setNome_item(nome_item);
+        vendadto.setValor_venda(qtd*preco_item);
+        
+        VendaDAO vendadao = new VendaDAO();
+        try {
+            vendadao.listarVendas(vendadto);
+        } catch (SQLException ex) {
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnValidarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -139,16 +258,21 @@ public class Interface extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -168,10 +292,10 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTable Table;
     private javax.swing.JLabel ValorVendaLabel;
     private javax.swing.JButton btnValidar;
-    private javax.swing.JComboBox<String> cbxCliente;
-    private javax.swing.JComboBox<String> cbxFuncionario;
-    private javax.swing.JComboBox<String> cbxProduto;
+    private javax.swing.JComboBox cbxCliente;
+    private javax.swing.JComboBox cbxProduto;
+    private javax.swing.JComboBox cbxQtd;
+    private javax.swing.JComboBox cbxVendedor;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField tbxQuantidade;
     // End of variables declaration//GEN-END:variables
 }

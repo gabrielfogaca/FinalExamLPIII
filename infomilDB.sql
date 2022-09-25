@@ -1,4 +1,4 @@
-venda/* Exclui o banco de dados */
+/* Exclui o banco de dados */
 DROP DATABASE IF EXISTS InfoMil;
 
 /* Cria o banco de dados */
@@ -57,7 +57,6 @@ CREATE TABLE VENDA (
 	nome_vendedor varchar(50) 	not null,
 	nome_cliente   varchar(50) 	not null,
     nome_item varchar(50) not null,
- 	dt_Venda  DATE   NOT NULL,
 	vl_total_venda    decimal(9,2),
 PRIMARY KEY(id_venda),
 FOREIGN KEY(id_cliente) 

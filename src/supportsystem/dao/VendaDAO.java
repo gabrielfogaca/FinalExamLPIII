@@ -12,13 +12,13 @@ public class VendaDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        pstmt = db.getConnection().prepareStatement("INSERT INTO venda (nome_cliente, nome_vendedor, nome_item, vl_total_venda) values (?, ?, ?, ?)");
+        pstmt = db.getConnection().prepareStatement("INSERT INTO venda (id_cliente, id_vendedor,nome_cliente, nome_vendedor, nome_item) values (1, 1, ?, ?, ?)");
         pstmt.setString(1, vendadto.getNome_cliente());
         pstmt.setString(2, vendadto.getNome_vendedor());
         pstmt.setString(3, vendadto.getNome_item());
-        pstmt.setInt(4, vendadto.getValor_venda());
+        //    pstmt.setInt(4, vendadto.getValor_venda());
 
-        pstmt.executeQuery();
+        pstmt.execute();
         pstmt.close();
     }
 }

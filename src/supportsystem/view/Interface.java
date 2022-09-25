@@ -223,26 +223,26 @@ public class Interface extends javax.swing.JFrame {
         int preco_item;
         int qtd;
 
-        nome_cliente = (String)cbxCliente.getSelectedItem();
-        nome_vendedor = (String) cbxVendedor.getSelectedItem();
-        nome_item = (String) cbxProduto.getSelectedItem();
-        preco_item = (int) cbxProduto.getSelectedItem();
-        qtd = (int) cbxQtd.getSelectedItem();
-        
+        nome_cliente = String.valueOf(cbxCliente.getSelectedItem());
+        nome_vendedor = String.valueOf(cbxVendedor.getSelectedItem());
+        nome_item = String.valueOf(cbxProduto.getSelectedItem());
+//      preco_item = (int)cbxProduto.getSelectedItem();
+//      qtd = (int) cbxQtd.getSelectedItem();
+
         VendaDTO vendadto = new VendaDTO();
-        
+
         vendadto.setNome_cliente(nome_cliente);
         vendadto.setNome_vendedor(nome_vendedor);
         vendadto.setNome_item(nome_item);
-        vendadto.setValor_venda(qtd*preco_item);
-        
+//      vendadto.setValor_venda(qtd*preco_item);
+
         VendaDAO vendadao = new VendaDAO();
         try {
             vendadao.listarVendas(vendadto);
         } catch (SQLException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnValidarActionPerformed
     /**
      * @param args the command line arguments

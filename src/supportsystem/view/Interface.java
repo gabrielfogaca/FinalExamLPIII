@@ -46,26 +46,22 @@ public class Interface extends javax.swing.JFrame {
         cbxVendedor = new javax.swing.JComboBox();
         cbxProduto = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table = new javax.swing.JTable();
+        tabelaVendas = new javax.swing.JTable();
         btnValidar = new javax.swing.JButton();
         cbxQtd = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Venda");
+        setTitle("Sistema de Vendas");
         setResizable(false);
 
-        ClienteLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ClienteLabel.setText("Cliente:");
 
-        FuncionarioLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         FuncionarioLabel.setText("Vendedor:");
 
-        ProdutoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ProdutoLabel.setText("Produto:");
 
-        ValorVendaLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ValorVendaLabel.setText("Quantidade: ");
 
         cbxCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
@@ -76,11 +72,6 @@ public class Interface extends javax.swing.JFrame {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        cbxCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxClienteActionPerformed(evt);
             }
         });
 
@@ -96,7 +87,6 @@ public class Interface extends javax.swing.JFrame {
         });
 
         cbxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
-        cbxProduto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbxProduto.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 cbxProdutoAncestorAdded(evt);
@@ -107,7 +97,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        Table.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -115,7 +105,7 @@ public class Interface extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Cliente", "Vendedor", "Produto", "Quantidade"
+                "Cliente", "Vendedor", "Produto", "Valor Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -126,7 +116,7 @@ public class Interface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Table);
+        jScrollPane1.setViewportView(tabelaVendas);
 
         btnValidar.setText("Concluir Venda");
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,13 +126,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         cbxQtd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
-        cbxQtd.setMinimumSize(new java.awt.Dimension(84, 22));
-        cbxQtd.setPreferredSize(new java.awt.Dimension(84, 22));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Realizar Venda");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Inserir Venda");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Visualizar Vendas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,67 +138,62 @@ public class Interface extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(84, 84, 84)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ValorVendaLabel)
+                    .addComponent(ProdutoLabel)
+                    .addComponent(FuncionarioLabel)
+                    .addComponent(ClienteLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ValorVendaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(FuncionarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ProdutoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClienteLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxQtd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnValidar, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
-                .addGap(53, 53, 53)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(179, 179, 179))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxQtd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnValidar, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(198, 198, 198))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClienteLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FuncionarioLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ProdutoLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ValorVendaLabel))
-                .addGap(54, 54, 54)
-                .addComponent(btnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ClienteLabel)
+                            .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FuncionarioLabel)
+                            .addComponent(cbxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ProdutoLabel)
+                            .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ValorVendaLabel)
+                            .addComponent(cbxQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(btnValidar)))
+                .addGap(30, 30, 30))
         );
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbxProdutoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxProdutoAncestorAdded
@@ -256,34 +239,43 @@ public class Interface extends javax.swing.JFrame {
         String nome_cliente;
         String nome_vendedor;
         String nome_item;
-        int preco_item;
-        int qtd;
+        int id_cliente;
+        int id_vendedor;
+        float preco_item;
+        String qtd;
+        float valor_total;
 
-        nome_cliente = String.valueOf(cbxCliente.getSelectedItem());
-        nome_vendedor = String.valueOf(cbxVendedor.getSelectedItem());
-        nome_item = String.valueOf(cbxProduto.getSelectedItem());
-//      preco_item = (int)cbxProduto.getSelectedItem();
-//      qtd = (int) cbxQtd.getSelectedItem();
+        Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
+        Vendedor vendedor = (Vendedor) cbxVendedor.getSelectedItem();
+        Produto produto = (Produto) cbxProduto.getSelectedItem();
 
+        id_cliente = cliente.getId_cliente();
+        nome_cliente = cliente.getNome_cliente();
+        id_vendedor = vendedor.getId_vendedor();
+        nome_vendedor = vendedor.getNome_vendedor();
+        nome_item = produto.getNome_item();
+        preco_item = produto.getPreco();
+
+        qtd = (String) cbxQtd.getSelectedItem();
+        valor_total = preco_item * Integer.valueOf(qtd);
+        
         VendaDTO vendadto = new VendaDTO();
 
+        vendadto.setId_cliente(id_cliente);
+        vendadto.setId_vendedor(id_vendedor);
         vendadto.setNome_cliente(nome_cliente);
         vendadto.setNome_vendedor(nome_vendedor);
         vendadto.setNome_item(nome_item);
-//      vendadto.setValor_venda(qtd*preco_item);
+        vendadto.setValor_venda(valor_total);
 
         VendaDAO vendadao = new VendaDAO();
         try {
-            vendadao.listarVendas(vendadto);
+            vendadao.inserirVendas(vendadto);
         } catch (SQLException ex) {
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnValidarActionPerformed
-
-    private void cbxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxClienteActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -329,7 +321,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel ClienteLabel;
     private javax.swing.JLabel FuncionarioLabel;
     private javax.swing.JLabel ProdutoLabel;
-    private javax.swing.JTable Table;
     private javax.swing.JLabel ValorVendaLabel;
     private javax.swing.JButton btnValidar;
     private javax.swing.JComboBox cbxCliente;
@@ -339,5 +330,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabelaVendas;
     // End of variables declaration//GEN-END:variables
 }

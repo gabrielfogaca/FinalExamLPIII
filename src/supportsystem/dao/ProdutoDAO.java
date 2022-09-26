@@ -23,7 +23,7 @@ public class ProdutoDAO {
 
                 produto.setId_item(rs.getInt("id_item"));
                 produto.setNome_item(rs.getString("nome_item"));
-                produto.setPreco(rs.getInt("preco"));
+                produto.setPreco(rs.getFloat("preco"));
                 produto.setQtd(rs.getInt("qtde_estoque"));
                 produtos.add(produto);
             }

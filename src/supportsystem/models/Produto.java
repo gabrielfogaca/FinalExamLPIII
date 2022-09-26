@@ -4,7 +4,7 @@ public class Produto {
     
     private int id_item;
     private String nome_item;
-    private int preco;
+    private float preco;
     private int qtd;
 
     public int getId_item() {
@@ -23,11 +23,11 @@ public class Produto {
         this.nome_item = nome_item;
     }
 
-    public int getPreco() {
+    public float getPreco() {
         return preco;
     }
 
-    public void setPreco(int preco) {
+    public void setPreco(float preco) {
         this.preco = preco;
     }
 
@@ -42,8 +42,5 @@ public class Produto {
     @Override
     public String toString(){
         return this.getNome_item();
-    }
-    public int toInt(){
-        return this.getPreco();
     }
 }

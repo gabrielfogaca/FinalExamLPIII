@@ -1,10 +1,28 @@
 package supportsystem.dao;
 
 public class VendaDTO {
+    private int id_cliente;
+    private int id_vendedor;
     private String nome_cliente;
     private String nome_vendedor;
     private String nome_item;
-    private int valor_venda;
+    private float valor_venda;
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public int getId_vendedor() {
+        return id_vendedor;
+    }
+
+    public void setId_vendedor(int id_vendedor) {
+        this.id_vendedor = id_vendedor;
+    }
 
     public String getNome_cliente() {
         return nome_cliente;
@@ -30,11 +48,11 @@ public class VendaDTO {
         this.nome_item = nome_item;
     }
 
-    public int getValor_venda() {
+    public float getValor_venda() {
         return valor_venda;
     }
 
-    public void setValor_venda(int valor_venda) {
+    public void setValor_venda(float valor_venda) {
         this.valor_venda = valor_venda;
     }
     

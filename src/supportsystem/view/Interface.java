@@ -262,6 +262,7 @@ public class Interface extends javax.swing.JFrame {
         float preco_item;
         String qtd;
         float valor_total;
+        int qtd_estoque;
 
         Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
         Vendedor vendedor = (Vendedor) cbxVendedor.getSelectedItem();
@@ -276,7 +277,12 @@ public class Interface extends javax.swing.JFrame {
 
         qtd = (String) cbxQtd.getSelectedItem();
         valor_total = preco_item * Integer.valueOf(qtd);
+        // Updated upstream
 
+        qtd_estoque = produto.getQtd() - Integer.valueOf(qtd); 
+        System.out.println(qtd_estoque);
+        
+        //Stashed changes
         VendaDTO vendadto = new VendaDTO();
 
         vendadto.setId_cliente(id_cliente);
@@ -285,6 +291,7 @@ public class Interface extends javax.swing.JFrame {
         vendadto.setNome_vendedor(nome_vendedor);
         vendadto.setNome_item(nome_item);
         vendadto.setValor_venda(valor_total);
+        vendadto.setQuantidade_produto(qtd_estoque);
 
         VendaDAO vendadao = new VendaDAO();
         try {

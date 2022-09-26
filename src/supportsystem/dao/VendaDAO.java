@@ -15,7 +15,10 @@ public class VendaDAO {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
+        
+        db.getConnection().setAutoCommit(false);
+        try {
+            
         pstmt = db.getConnection().prepareStatement("INSERT INTO venda (id_cliente, id_vendedor, nome_cliente, nome_vendedor, nome_item, vl_total_venda) values (?, ?, ?, ?, ?, ?)");
         pstmt.setInt(1, vendadto.getId_cliente());
         pstmt.setInt(2, vendadto.getId_vendedor());
@@ -23,9 +26,22 @@ public class VendaDAO {
         pstmt.setString(4, vendadto.getNome_vendedor());
         pstmt.setString(5, vendadto.getNome_item());
         pstmt.setFloat(6, vendadto.getValor_venda());
-
+        
         pstmt.execute();
-        pstmt.close();
+        
+        //realizar o update na tabela de itens
+        pstmt = db.getConnection().prepareStatement("UPDATE item set qtde_estoque = ? where nome_item = ?");
+        pstmt.setInt(1, vendadto.getQuantidade_produto());
+        pstmt.setString(2, vendadto.getNome_item());        
+        
+        pstmt.execute();
+        
+        db.getConnection().commit();
+        } catch (Exception e){ 
+            db.getConnection().rollback();
+        }
+        db.getConnection().setAutoCommit(true);
+//        pstmt.close();       
     }
 
     public ArrayList<VendaDTO> listarVendas() throws SQLException {

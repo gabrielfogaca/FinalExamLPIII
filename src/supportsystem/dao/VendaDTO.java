@@ -7,6 +7,7 @@ public class VendaDTO {
     private String nome_vendedor;
     private String nome_item;
     private float valor_venda;
+    private int qtd_estoque;
 
     public int getId_cliente() {
         return id_cliente;
@@ -56,5 +57,12 @@ public class VendaDTO {
         this.valor_venda = valor_venda;
     }
     
+    public int getQuantidade_produto(){
+        return qtd_estoque;
+    }
+    
+    public void setQuantidade_produto(int qtd_estoque){
+        this.qtd_estoque = qtd_estoque;
+    }
     
 }

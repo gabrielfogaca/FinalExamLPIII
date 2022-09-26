@@ -28,11 +28,11 @@ public class VendaDAO {
         pstmt.close();
     }
 
-    public List<VendaDTO> listarVendas() throws SQLException {
+    public ArrayList<VendaDTO> listarVendas() throws SQLException {
         DataBase db = new DataBase();
         Statement stmt = null;
         ResultSet rs = null;
-        List<VendaDTO> vendas = new ArrayList<>();
+        ArrayList<VendaDTO> vendas = new ArrayList<>();
 
         try {
             stmt = db.getConnection().createStatement();

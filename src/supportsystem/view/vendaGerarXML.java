@@ -56,17 +56,17 @@ public class vendaGerarXML extends javax.swing.JFrame {
 
         tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cliente", "Vendedor", "Produto", "Valor Total"
+                "ID venda", "Cliente", "Vendedor", "Produto", "Valor Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,7 +181,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
         cbxVenda.removeAll();
         try {
             for (VendaDTO v : dao.listarVendas()) {
-                cbxVenda.addItem("Venda " + v.getId_venda());
+                cbxVenda.addItem("Venda ID: " + v.getId_venda());
             }
         } catch (SQLException ex) {
             cbxVenda.addItem("0");        
@@ -256,6 +256,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
+                    lista.get(i).getId_venda(),
                     lista.get(i).getNome_cliente(),
                     lista.get(i).getNome_vendedor(),
                     lista.get(i).getNome_item(),

@@ -3,18 +3,9 @@ package supportsystem.models;
 public class Venda {
     
     private int id_venda;
-    private int id_item;
     private String nome_item;
     private float preco;
     private int qtd;
-
-    public int getId_item() {
-        return id_item;
-    }
-
-    public void setId_item(int id_item) {
-        this.id_item = id_item;
-    }
 
     public String getNome_item() {
         return nome_item;
@@ -47,8 +38,4 @@ public class Venda {
     public void setId_venda(int id_venda) {
         this.id_venda = id_venda;
     }
-//     @Override
-//    public String toString(){
-//        return this.getId_venda);
-//    }
 }

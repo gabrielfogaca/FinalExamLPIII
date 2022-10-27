@@ -169,6 +169,30 @@ public class vendaGerarXML extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // GERAR O XML A PARTIR DO SELECT DA COMBOBOX
+        Object selectedItem = cbxVenda.getSelectedItem();
+        if (selectedItem != null) {
+            String selectedItemStr = selectedItem.toString();
+            String strMain = (String) selectedItem;
+            String arrSplit = strMain.substring(strMain.lastIndexOf(' ') + 1);
+            Integer.valueOf(arrSplit);
+            System.out.println(arrSplit);
+
+            String id_venda = arrSplit;
+            int venda = Integer.valueOf(id_venda);
+
+            VendaDTO vendadto = new VendaDTO();
+
+            vendadto.setId_venda(venda);
+
+            VendaDAO vendadao = new VendaDAO();
+
+            try {
+                vendadao.VendasXML(vendadto);
+            } catch (SQLException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            };
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbxVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVendaActionPerformed
@@ -184,10 +208,10 @@ public class vendaGerarXML extends javax.swing.JFrame {
                 cbxVenda.addItem("Venda ID: " + v.getId_venda());
             }
         } catch (SQLException ex) {
-            cbxVenda.addItem("0");        
+            cbxVenda.addItem("0");
             Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
     }//GEN-LAST:event_cbxVendaAncestorAdded
     /**
      * @param args the command line arguments

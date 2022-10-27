@@ -1,6 +1,7 @@
 package supportsystem.dao;
 
 public class VendaDTO {
+    private int id_venda;
     private int id_cliente;
     private int id_vendedor;
     private String nome_cliente;
@@ -62,6 +63,22 @@ public class VendaDTO {
     }
     
     public void setQuantidade_produto(int qtd_estoque){
+        this.qtd_estoque = qtd_estoque;
+    }
+
+    public int getId_venda() {
+        return id_venda;
+    }
+
+    public void setId_venda(int id_venda) {
+        this.id_venda = id_venda;
+    }
+
+    public int getQtd_estoque() {
+        return qtd_estoque;
+    }
+
+    public void setQtd_estoque(int qtd_estoque) {
         this.qtd_estoque = qtd_estoque;
     }
     

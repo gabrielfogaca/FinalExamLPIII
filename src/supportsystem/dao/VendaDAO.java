@@ -57,6 +57,7 @@ public class VendaDAO {
             while (rs.next()) {
                 VendaDTO venda = new VendaDTO();
 
+                venda.setId_venda(rs.getInt("id_venda"));
                 venda.setId_cliente(rs.getInt("id_cliente"));
                 venda.setId_vendedor(rs.getInt("id_vendedor"));
                 venda.setNome_cliente(rs.getString("nome_cliente"));

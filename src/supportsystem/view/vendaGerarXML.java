@@ -50,7 +50,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cbxVenda = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Vendas");
         setResizable(false);
 
@@ -161,6 +161,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
         jButton1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -189,7 +190,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
             try {
                 vendadao.VendasXML(vendadto);
             } catch (SQLException ex) {
-                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
             };
         }
 
@@ -209,7 +210,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             cbxVenda.addItem("0");
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_cbxVendaAncestorAdded

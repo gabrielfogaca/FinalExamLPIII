@@ -3,14 +3,15 @@ package supportsystem.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import supportsystem.database.DataBase;
 import supportsystem.models.Cliente;
 
 public class ClienteDAO {
-    
-     public List<Cliente> listarClientes() throws SQLException {
+
+    public List<Cliente> listarClientes() throws SQLException {
         DataBase db = new DataBase();
         Statement stmt = null;
         ResultSet rs = null;
@@ -35,5 +36,23 @@ public class ClienteDAO {
         }
         return clientes;
 
+    }
+
+    public void inserirCliente(Cliente cliente) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("INSERT INTO cliente (nome_cliente, id_tipo_cliente) VALUES (?, ?)");
+            pstmt.setString(1, cliente.getNome_cliente());
+            pstmt.setInt(2, cliente.getId_tipo_cliente());
+            pstmt.execute();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
     }
 }

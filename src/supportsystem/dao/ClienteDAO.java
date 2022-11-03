@@ -44,8 +44,9 @@ public class ClienteDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("INSERT INTO cliente (nome_cliente) VALUES (?)");
+            pstmt = db.getConnection().prepareStatement("INSERT INTO cliente (nome_cliente, id_tipo_cliente) VALUES (?, ?)");
             pstmt.setString(1, cliente.getNome_cliente());
+            pstmt.setInt(2, cliente.getId_tipo_cliente());
             pstmt.execute();
 
         } catch (SQLException ex) {

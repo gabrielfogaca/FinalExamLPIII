@@ -85,7 +85,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Gerar");
+        jButton1.setText("Gerar XML");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -289,7 +289,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
             }
 
         } catch (Exception ex) {
-            System.out.println("Erro Listar Vendas");
+            System.out.println("Erro ao Listar Vendas");
         }
     }
 }

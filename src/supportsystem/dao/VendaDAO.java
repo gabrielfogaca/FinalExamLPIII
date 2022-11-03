@@ -8,8 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import supportsystem.createXML.CriarDocumentoXML;
 import supportsystem.database.DataBase;
 import supportsystem.models.Vendedor;
+import supportsystem.xml.ManipuladorXML;
+import supportsystem.createXML.CriarDocumentoXML;
 
 public class VendaDAO {
 
@@ -111,7 +114,7 @@ public class VendaDAO {
             db.close();
         }
 
-        return vendaXML;
+        return CriarDocumentoXML.main(vendaXML);
         //preciso retornar um array contendo as informações da venda.
 
     }

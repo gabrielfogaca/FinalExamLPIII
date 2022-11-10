@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ProdutoDAO;
+import supportsystem.dao.ProdutoDTO;
 import supportsystem.dao.VendaDAO;
 import supportsystem.dao.VendaDTO;
 import supportsystem.dao.VendedorDAO;
@@ -97,6 +99,11 @@ public class InserirVenda extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        cbxProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProdutoActionPerformed(evt);
+            }
+        });
 
         btnValidar.setText("Realizar Venda");
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +183,7 @@ public class InserirVenda extends javax.swing.JFrame {
         ProdutoDAO dao = new ProdutoDAO();
         cbxProduto.removeAll();
         try {
-            for (Produto p : dao.listarProduto()) {
+            for (Produto p : dao.listarProdutoVenda()) {
                 cbxProduto.addItem(p);
             }
         } catch (SQLException ex) {
@@ -250,11 +257,16 @@ public class InserirVenda extends javax.swing.JFrame {
         VendaDAO vendadao = new VendaDAO();
         try {
             vendadao.inserirVendas(vendadto);
+            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
         } catch (SQLException ex) {
             Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnValidarActionPerformed
+
+    private void cbxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProdutoActionPerformed
     /**
      * @param args the command line arguments
      */

@@ -42,9 +42,8 @@ PRIMARY KEY(id_vendedor));
 
 /* Cria tabela ITEM de estoque */
 CREATE TABLE ITEM (
-	id_item   INT  		NOT NULL,
+	id_item   INT  		NOT NULL  auto_increment,
 	nome_item   char(40) 	not null,
-	unidade  char(5),
 	preco    decimal(9,2),
 	qtde_estoque   INT,
 PRIMARY KEY(id_item));
@@ -81,18 +80,18 @@ FOREIGN KEY(id_item)
 	on delete restrict);
 
 /* grupo 1 informatica */
-insert into item values(1,'SSD Kingston 240GB','UND',179.99,20);
-insert into item values(2,'i7 9700kf','UND',849.99,10);
-insert into item values(3,'Placa Mae b450 steel','UND',799.00,17);
-insert into item values(4,'ASUS RTX 3060 12GB','UND',2899.99,6);
-insert into item values(5,'WD 480gb nvme','UND',433.50,7);
-insert into item values(6,'i7 12700k','UND',1679.90,3);
-insert into item values(7,'AMD 5600x','UND',1349.50,3);
-insert into item values(8,'Gabinete Aerials RGB','UND',245.55,2);
-insert into item values(9,'Monitor Gamer Samsung 27" 144Hz ','PC',1879.00,3);
-insert into item values(10,'PlayStation 5','PC',1299,8);
-insert into item values(11,'Memoria Ram 2x8gb 3200mhz','PC',566,3);
-insert into item values(12,'Fonte 850 plus bronze','PC',545,4);
+insert into item values(1,'SSD Kingston 240GB',179.99,20);
+insert into item values(2,'i7 9700kf',849.99,10);
+insert into item values(3,'Placa Mae b450 steel',799.00,17);
+insert into item values(4,'ASUS RTX 3060 12GB',2899.99,6);
+insert into item values(5,'WD 480gb nvme',433.50,7);
+insert into item values(6,'i7 12700k',1679.90,3);
+insert into item values(7,'AMD 5600x',1349.50,3);
+insert into item values(8,'Gabinete Aerials RGB',245.55,2);
+insert into item values(9,'Monitor Gamer Samsung 27" 144Hz ',1879.3,5);
+insert into item values(10,'PlayStation 5',1299,8);
+insert into item values(11,'Memoria Ram 2x8gb 3200mhz',566,3);
+insert into item values(12,'Fonte 850 plus bronze',545,4);
 
 insert into tipo_cliente values (1,'Pessoa Fisica');
 insert into tipo_cliente values (2,'Pessoa Juridica');

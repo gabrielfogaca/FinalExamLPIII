@@ -18,11 +18,11 @@ public class LerValoresXML {
             Document doc = ManipuladorXML.readXmlFile("./empregados.xml");
             
             // Read NODE values
-            XPathExpression e1 = ManipuladorXML .getXPathExpression("//empregado[@cod='E01']/nome");
+            XPathExpression e1 = ManipuladorXML .getXPathExpression(" ");
             //XPathExpression e1 = XMLHandler .getXPathExpression("//empregado[nome='Maria']/nome");
             String nome = (String) e1.evaluate(doc, XPathConstants.STRING);
             
-            XPathExpression e2 = ManipuladorXML.getXPathExpression("//empregado[@cod='E01']/sobrenome");
+            XPathExpression e2 = ManipuladorXML.getXPathExpression("");
             //XPathExpression e2 = XMLHandler.getXPathExpression("//empregado[nome='Maria']/sobrenome");
             String sobrenome = ((String) e2.evaluate(doc, XPathConstants.STRING));
             

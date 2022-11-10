@@ -5,10 +5,65 @@ import supportsystem.database.DataBase;
 import supportsystem.models.Produto;
 import java.sql.*;
 import java.util.ArrayList;
+import supportsystem.models.Cliente;
 
 public class ProdutoDAO {
 
-    public List<Produto> listarProduto() throws SQLException {
+    public ArrayList<ProdutoDTO> listarProduto() throws SQLException {
+        DataBase db = new DataBase();
+        Statement stmt = null;
+        ResultSet rs = null;
+        ArrayList<ProdutoDTO> produtos = new ArrayList<>();
+
+        try {
+            stmt = db.getConnection().createStatement();
+            rs = stmt.executeQuery("SELECT * FROM item");
+
+            while (rs.next()) {
+                ProdutoDTO produto = new ProdutoDTO();
+
+                produto.setId_item(rs.getInt("id_item"));
+                produto.setNome_item(rs.getString("nome_item"));
+                produto.setPreco(rs.getFloat("preco"));
+                produto.setQtde_produto(rs.getInt("qtde_estoque"));
+                produtos.add(produto);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return produtos;
+
+    }
+    
+    
+    public void inserirProduto(Produto produto) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("INSERT INTO item (nome_item, preco, qtde_estoque) VALUES (?, ?, ?)");
+            pstmt.setString(1, produto.getNome_item());
+            pstmt.setFloat(2,produto.getPreco());
+            pstmt.setInt(3,produto.getQtd());
+            pstmt.execute();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+    }
+    
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
+    public List<Produto> listarProdutoVenda() throws SQLException {
         DataBase db = new DataBase();
         Statement stmt = null;
         ResultSet rs = null;

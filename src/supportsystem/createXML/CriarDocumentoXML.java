@@ -74,7 +74,7 @@ public class CriarDocumentoXML {
             float y = vendaXML.get(i).getValor_venda();
             String valvenda = Integer.toString((int) y);
             // <Valor>
-            Element valor = doc.createElement("Valor");
+            Element valor = doc.createElement("Valor_total_venda");
             valor.setTextContent(valvenda);
             produto.appendChild(valor);
 

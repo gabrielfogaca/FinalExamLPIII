@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import supportsystem.logging.LogController;
 
 public class DataBase {
     
@@ -60,7 +61,7 @@ public class DataBase {
             connection = DriverManager.getConnection(url, userName, password);
         } catch (SQLException ex) {
             System.out.println("Erro ao conectar-se ao banco. " + ex.getMessage());
-            Logger.getLogger(DataBase.class.getName()).log(Level.SEVERE, null, ex);
+            LogController.createLog("Erro ao conectar-se ao banco. " + ex.getMessage(), "S");
         }
     }
 

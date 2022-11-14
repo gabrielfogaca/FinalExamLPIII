@@ -93,4 +93,23 @@ public class ProdutoDAO {
         return produtos;
 
     }
+    
+    public ArrayList<ProdutoDTO> deleteProduto(ProdutoDTO produtodto) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("delete from item where id_item = ?");
+            pstmt.setInt(1,produtodto.getId_item());
+            pstmt.execute();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
+    }
+
 }

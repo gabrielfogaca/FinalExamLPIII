@@ -6,23 +6,27 @@
 package supportsystem.view;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import supportsystem.dao.ClienteDAO;
+import supportsystem.dao.ClienteDTO;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.ProdutoDTO;
 import supportsystem.logging.LogController;
+import supportsystem.models.Cliente;
 
 /**
  *
  * @author Bruno
  */
-public class MenuProduto extends javax.swing.JFrame {
+public class MenuCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuProduto() {
+    public MenuCliente() {
         initComponents();
-        listarProdutos();
+        listarClientes();
     }
 
     /**
@@ -39,17 +43,20 @@ public class MenuProduto extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaProdutos = new javax.swing.JTable();
+        tabelaClientes = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Support System - Menu Produtos");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Produtos");
+        jLabel1.setText("Clientes");
 
-        jButton3.setText("Cadastrar Produtos");
+        jButton3.setText("Cadastrar Cliente");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -63,22 +70,22 @@ public class MenuProduto extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Deletar Produtos");
+        jButton7.setText("Deletar Cliente");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        tabelaProdutos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID Produto", "Nome Produto", "Valor(un)", "Estoque"
+                "ID Cliente", "Nome Cliente", "Tipo Cliente"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,7 +96,7 @@ public class MenuProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaProdutos);
+        jScrollPane1.setViewportView(tabelaClientes);
 
         btnAtualizar.setText("Atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,18 +105,32 @@ public class MenuProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel2.setText("Cliente tipo 1 - Pessoa Física; Cliente tipo 2 - Pessoa Juridica");
+
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel4.setText("OBS:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(341, 341, 341)
                         .addComponent(btnAtualizar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,20 +141,25 @@ public class MenuProduto extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtualizar)
-                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnAtualizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton6)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jButton6))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,18 +171,18 @@ public class MenuProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CadProduto frame = new CadProduto();
+        CadCliente frame = new CadCliente();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        DelProduto frame = new DelProduto();
+        DelCliente frame = new DelCliente();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         LogController.createLog("Listando produtos", "I");
-        listarProdutos();
+        listarClientes();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
@@ -176,21 +202,23 @@ public class MenuProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuProduto().setVisible(true);
+                new MenuCliente().setVisible(true);
             }
         });
     }
@@ -201,30 +229,33 @@ public class MenuProduto extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaProdutos;
+    private javax.swing.JTable tabelaClientes;
     // End of variables declaration//GEN-END:variables
 
-    private void listarProdutos() {
+    private void listarClientes() {
         try {
-            ProdutoDAO produtodao = new ProdutoDAO();
-            DefaultTableModel model = (DefaultTableModel) tabelaProdutos.getModel();
+            //ProdutoDAO produtodao = new ProdutoDAO();
+            ClienteDAO clientedao = new ClienteDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaClientes.getModel();
 
             model.setNumRows(0);
-            ArrayList<ProdutoDTO> lista = produtodao.listarProduto();
+            List<Cliente> lista = clientedao.listarClientes();
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getId_item(),
-                    lista.get(i).getNome_item(),
-                    lista.get(i).getPreco(),
-                    lista.get(i).getQtde_produto()
+                    lista.get(i).getId_cliente(),
+                    lista.get(i).getNome_cliente(),
+                    lista.get(i).getId_tipo_cliente(),
                 });
             }
 
         } catch (Exception ex) {
-            System.out.println("Erro ao Listar Vendas");
-            LogController.createLog("Erro ao Listar Vendas", "W");
+            System.out.println("Erro ao Listar Clientes");
+            LogController.createLog("Erro ao Listar Clientes", "W");
         }
     }
 

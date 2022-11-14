@@ -42,7 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Support System - Menu");
         setResizable(false);
 
-        jButton1.setText("Cadastrar Clientes");
+        jButton1.setText("Menu de Clientes");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -128,8 +128,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CadCliente frame = new CadCliente();
-        LogController.createLog("Iniciando CRUD de cadastro de novo cliente", "I");
+        MenuCliente frame = new MenuCliente();
+        LogController.createLog("Iniciando CRUD cliente", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

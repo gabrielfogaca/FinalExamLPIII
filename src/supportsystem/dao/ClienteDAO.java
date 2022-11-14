@@ -27,6 +27,7 @@ public class ClienteDAO {
 
                 cliente.setId_cliente(rs.getInt("id_cliente"));
                 cliente.setNome_cliente(rs.getString("nome_cliente"));
+                cliente.setId_tipo_cliente(rs.getInt("id_tipo_cliente"));
                 clientes.add(cliente);
             }
 
@@ -56,5 +57,23 @@ public class ClienteDAO {
         } finally {
             db.close();
         }
+    }
+    
+    public ArrayList<ClienteDTO> deleteCliente(ClienteDTO clientedto) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("delete from cliente where id_cliente = ?");
+            pstmt.setInt(1,clientedto.getId_cliente());
+            pstmt.execute();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
     }
 }

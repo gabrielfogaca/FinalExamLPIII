@@ -5,15 +5,14 @@
  */
 package supportsystem.view;
 
+import java.io.File;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import supportsystem.dao.ClienteDAO;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import supportsystem.createXML.LerValoresXML;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.logging.LogController;
-import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
 
 /**
@@ -42,23 +41,25 @@ public class CadProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cbxNomeProduto = new javax.swing.JTextField();
-        btnCadCliente = new javax.swing.JButton();
+        btnCadProduto = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbxPrecoProduto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         cbxQuantidadeProduto = new javax.swing.JTextField();
+        btnCadProdutoXML = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("SupportSystem - Cadastro de Produtos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Cadastrar Produto");
 
         jLabel2.setText("Nome:");
 
-        btnCadCliente.setText("Cadastrar");
-        btnCadCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnCadProduto.setText("Cadastrar");
+        btnCadProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadClienteActionPerformed(evt);
+                btnCadProdutoActionPerformed(evt);
             }
         });
 
@@ -78,6 +79,13 @@ public class CadProduto extends javax.swing.JFrame {
             }
         });
 
+        btnCadProdutoXML.setText("Carregar XML");
+        btnCadProdutoXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadProdutoXMLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,26 +93,33 @@ public class CadProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(btnCadCliente))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbxNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel4)
+                                .addGap(13, 13, 13))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(jLabel5)
-                                .addGap(13, 13, 13)
-                                .addComponent(cbxQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(13, 13, 13)
-                                    .addComponent(cbxPrecoProduto))
-                                .addComponent(jLabel1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cbxNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxQuantidadeProduto)
+                            .addComponent(cbxPrecoProduto))))
+                .addContainerGap(90, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadProdutoXML))
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,16 +138,18 @@ public class CadProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbxQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btnCadCliente)
-                .addGap(19, 19, 19))
+                .addGap(18, 18, 18)
+                .addComponent(btnCadProdutoXML)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadProduto)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadClienteActionPerformed
+    private void btnCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdutoActionPerformed
         try {
             Produto produto = new Produto();
             ProdutoDAO produtodao = new ProdutoDAO();
@@ -141,7 +158,6 @@ public class CadProduto extends javax.swing.JFrame {
             produto.setPreco(Float.parseFloat(cbxPrecoProduto.getText()));
             produto.setQtd(Integer.parseInt(cbxQuantidadeProduto.getText()));
 
-                       
             produtodao.inserirProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto inserido com sucesso!");
 
@@ -149,23 +165,42 @@ public class CadProduto extends javax.swing.JFrame {
             LogController.createLog("Erro ao cadastrar o produto" + ex.getMessage(), "I");
         }
         LogController.createLog("Produto cadastrado", "I");
-    }//GEN-LAST:event_btnCadClienteActionPerformed
+    }//GEN-LAST:event_btnCadProdutoActionPerformed
 
     private void cbxPrecoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxPrecoProdutoKeyTyped
         char c = evt.getKeyChar();
-        
-        if(!Character.isDigit(c)){
+
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
     }//GEN-LAST:event_cbxPrecoProdutoKeyTyped
 
     private void cbxQuantidadeProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxQuantidadeProdutoKeyTyped
         char c = evt.getKeyChar();
-        
-        if(!Character.isDigit(c)){
+
+        if (!Character.isDigit(c)) {
             evt.consume();
-        }        
+        }
     }//GEN-LAST:event_cbxQuantidadeProdutoKeyTyped
+
+    private void btnCadProdutoXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdutoXMLActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Selecione o arquivo XML", "xml");
+
+        fileChooser.setFileFilter(filter);
+        fileChooser.showOpenDialog(this);
+
+        File f = fileChooser.getSelectedFile();
+
+        Produto p = new Produto();
+        p = LerValoresXML.lerXML(f.getPath());
+
+        cbxNomeProduto.setText(p.getNome_item());
+        cbxPrecoProduto.setText(String.valueOf(p.getPreco()));
+        cbxQuantidadeProduto.setText(String.valueOf(p.getQtd()));
+        
+        JOptionPane.showMessageDialog(null, "XML Carregado!");
+    }//GEN-LAST:event_btnCadProdutoXMLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +239,8 @@ public class CadProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadCliente;
+    private javax.swing.JButton btnCadProduto;
+    private javax.swing.JButton btnCadProdutoXML;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField cbxNomeProduto;
     private javax.swing.JTextField cbxPrecoProduto;

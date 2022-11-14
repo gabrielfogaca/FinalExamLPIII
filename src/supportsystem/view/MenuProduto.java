@@ -42,8 +42,8 @@ public class MenuProduto extends javax.swing.JFrame {
         tabelaProdutos = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Support System - Menu");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Support System - Menu Produtos");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -149,7 +149,6 @@ public class MenuProduto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadProduto frame = new CadProduto();
-        LogController.createLog("Novo produto cadastrado", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 

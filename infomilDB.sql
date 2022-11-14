@@ -69,7 +69,7 @@ FOREIGN KEY(id_vendedor)
 
 /* Cria tabela de Itens das Notas fiscais */
 CREATE TABLE item_venda (
-	id_venda    INT 	NOT NULL,
+	id_venda    INT 	NOT NULL auto_increment,
  	id_item   INT  	NOT NULL,
 	qtde  INT 	not null,
 	valor  decimal(9,2),

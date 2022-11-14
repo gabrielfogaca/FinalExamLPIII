@@ -1,17 +1,11 @@
 package supportsystem.dao;
 
-import com.mysql.cj.jdbc.Driver;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import supportsystem.createXML.CriarDocumentoXML;
 import supportsystem.database.DataBase;
-import supportsystem.models.Vendedor;
-import supportsystem.xml.ManipuladorXML;
 import supportsystem.createXML.CriarDocumentoXML;
 import supportsystem.logging.LogController;
 
@@ -91,7 +85,6 @@ public class VendaDAO {
         
         String myQuery = "SELECT * FROM venda where id_venda = " + vendadto.getId_venda();
         
-        System.out.println(myQuery);
         try {               
             stmt = db.getConnection().createStatement();
             rs = stmt.executeQuery(myQuery);

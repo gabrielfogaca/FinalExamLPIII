@@ -47,7 +47,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
         tabelaVendas = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnAtualizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnGerarXML = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         cbxVenda = new javax.swing.JComboBox<>();
 
@@ -86,10 +86,10 @@ public class vendaGerarXML extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Gerar XML");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGerarXML.setText("Gerar XML");
+        btnGerarXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGerarXMLActionPerformed(evt);
             }
         });
 
@@ -130,7 +130,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
                         .addComponent(cbxVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnGerarXML)
                         .addGap(44, 44, 44)))
                 .addGap(27, 27, 27))
         );
@@ -153,11 +153,11 @@ public class vendaGerarXML extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cbxVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(btnGerarXML)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
 
-        jButton1.getAccessibleContext().setAccessibleDescription("");
+        btnGerarXML.getAccessibleContext().setAccessibleDescription("");
 
         pack();
         setLocationRelativeTo(null);
@@ -167,7 +167,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
         listarVendas();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarXMLActionPerformed
         // GERAR O XML A PARTIR DO SELECT DA COMBOBOX
         Object selectedItem = cbxVenda.getSelectedItem();
         if (selectedItem != null) {
@@ -175,7 +175,6 @@ public class vendaGerarXML extends javax.swing.JFrame {
             String strMain = (String) selectedItem;
             String arrSplit = strMain.substring(strMain.lastIndexOf(' ') + 1);
             Integer.valueOf(arrSplit);
-            System.out.println(arrSplit);
 
             String id_venda = arrSplit;
             int venda = Integer.valueOf(id_venda);
@@ -193,7 +192,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
             };
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGerarXMLActionPerformed
 
     private void cbxVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxVendaActionPerformed
         // TODO add your handling code here:         
@@ -262,8 +261,8 @@ public class vendaGerarXML extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnGerarXML;
     private javax.swing.JComboBox<String> cbxVenda;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

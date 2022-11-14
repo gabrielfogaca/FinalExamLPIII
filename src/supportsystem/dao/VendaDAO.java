@@ -13,6 +13,7 @@ import supportsystem.database.DataBase;
 import supportsystem.models.Vendedor;
 import supportsystem.xml.ManipuladorXML;
 import supportsystem.createXML.CriarDocumentoXML;
+import supportsystem.logging.LogController;
 
 public class VendaDAO {
 
@@ -110,6 +111,7 @@ public class VendaDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela VENDA do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }

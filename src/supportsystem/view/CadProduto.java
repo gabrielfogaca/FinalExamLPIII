@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ProdutoDAO;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
 
@@ -145,8 +146,9 @@ public class CadProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Produto inserido com sucesso!");
 
         } catch (SQLException ex) {
-            Logger.getLogger(CadProduto.class.getName()).log(Level.SEVERE, null, ex);
+            LogController.createLog("Erro ao cadastrar o produto" + ex.getMessage(), "I");
         }
+        LogController.createLog("Produto cadastrado", "I");
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void cbxPrecoProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxPrecoProdutoKeyTyped

@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import supportsystem.database.DataBase;
+import supportsystem.logging.LogController;
 import supportsystem.models.Vendedor;
 
 public class VendedorDAO {
@@ -30,6 +31,7 @@ public class VendedorDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela VENDEDOR do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }

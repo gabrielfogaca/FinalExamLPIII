@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.ProdutoDTO;
+import supportsystem.logging.LogController;
 
 /**
  *
@@ -148,6 +149,7 @@ public class MenuProduto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadProduto frame = new CadProduto();
+        LogController.createLog("Novo produto cadastrado", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -156,6 +158,7 @@ public class MenuProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        LogController.createLog("Listando produtos", "I");
         listarProdutos();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
@@ -224,6 +227,7 @@ public class MenuProduto extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             System.out.println("Erro ao Listar Vendas");
+            LogController.createLog("Erro ao Listar Vendas", "W");
         }
     }
 

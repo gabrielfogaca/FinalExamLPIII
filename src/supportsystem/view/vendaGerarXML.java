@@ -14,6 +14,7 @@ import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.VendaDAO;
 import supportsystem.dao.VendaDTO;
 import supportsystem.dao.VendedorDAO;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Venda;
 import supportsystem.models.Vendedor;
@@ -30,6 +31,7 @@ public class vendaGerarXML extends javax.swing.JFrame {
     public vendaGerarXML() {
         initComponents();
         listarVendas();
+        LogController.createLog("Arquivo XML da venda gerado", "I");
     }
 
     /**

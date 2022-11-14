@@ -16,6 +16,7 @@ import supportsystem.dao.ProdutoDTO;
 import supportsystem.dao.VendaDAO;
 import supportsystem.dao.VendaDTO;
 import supportsystem.dao.VendedorDAO;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
 import supportsystem.models.Vendedor;
@@ -259,7 +260,7 @@ public class InserirVenda extends javax.swing.JFrame {
             vendadao.inserirVendas(vendadto);
             JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
         } catch (SQLException ex) {
-            Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+            LogController.createLog("Errp ao realizar venda" + ex.getMessage(), "W");
         }
 
     }//GEN-LAST:event_btnValidarActionPerformed

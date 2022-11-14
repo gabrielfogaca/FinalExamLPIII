@@ -5,6 +5,7 @@ import supportsystem.database.DataBase;
 import supportsystem.models.Produto;
 import java.sql.*;
 import java.util.ArrayList;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 
 public class ProdutoDAO {
@@ -85,6 +86,7 @@ public class ProdutoDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela PRODUTO do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }

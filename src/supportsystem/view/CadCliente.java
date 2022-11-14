@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import supportsystem.dao.ClienteDAO;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 
 /**
@@ -139,8 +140,9 @@ public class CadCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso!");
 
         } catch (SQLException ex) {
-            Logger.getLogger(CadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            LogController.createLog("Erro ao cadastrar cliente", "W");
         }
+        LogController.createLog("Cliente cadastrado", "I");
     }//GEN-LAST:event_btnCadClienteActionPerformed
 
     private void rbtnTipoPfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTipoPfActionPerformed

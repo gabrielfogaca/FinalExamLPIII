@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import supportsystem.database.DataBase;
+import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 
 public class ClienteDAO {
@@ -51,6 +52,7 @@ public class ClienteDAO {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela CLIENTE do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }

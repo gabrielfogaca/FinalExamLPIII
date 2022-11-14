@@ -5,16 +5,19 @@
  */
 package supportsystem.view;
 
+import supportsystem.logging.LogController;
+
 /**
  *
  * @author Bruno
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+        LogController.createLog("Iniciando programa", "I");
         initComponents();
     }
 
@@ -126,21 +129,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CadCliente frame = new CadCliente();
+        LogController.createLog("Iniciando CRUD de cadastro de novo cliente", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         vendaGerarXML frame = new vendaGerarXML();
+        LogController.createLog("Iniciando CRUD de geração de XML", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         InserirVenda frame = new InserirVenda();
+        LogController.createLog("Iniciando tela de inserção de venda", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       System.exit(0);
+       LogController.createLog("Encerrando sistema", "I");
+        System.exit(0);
+       
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -157,6 +165,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -174,7 +183,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

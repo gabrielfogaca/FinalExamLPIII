@@ -57,7 +57,6 @@ public class InserirVenda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Vendas");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(415, 450));
         setResizable(false);
 
         ClienteLabel.setText("Cliente:");
@@ -91,6 +90,11 @@ public class InserirVenda extends javax.swing.JFrame {
         });
 
         cbxProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione" }));
+        cbxProduto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxProdutoItemStateChanged(evt);
+            }
+        });
         cbxProduto.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 cbxProdutoAncestorAdded(evt);
@@ -112,8 +116,6 @@ public class InserirVenda extends javax.swing.JFrame {
                 btnValidarActionPerformed(evt);
             }
         });
-
-        cbxQtd.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Inserir Venda");
@@ -266,8 +268,18 @@ public class InserirVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnValidarActionPerformed
 
     private void cbxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProdutoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cbxProdutoActionPerformed
+
+    private void cbxProdutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxProdutoItemStateChanged
+        cbxQtd.removeAllItems();
+        Produto produto = (Produto) cbxProduto.getSelectedItem();
+        ProdutoDAO dao = new ProdutoDAO();
+        produto.getQtd();
+        for (int i = 1; i <= produto.getQtd(); i++) {
+            cbxQtd.addItem(i);
+        }
+    }//GEN-LAST:event_cbxProdutoItemStateChanged
     /**
      * @param args the command line arguments
      */

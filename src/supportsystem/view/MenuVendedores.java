@@ -12,21 +12,23 @@ import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ClienteDTO;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.ProdutoDTO;
+import supportsystem.dao.VendedorDAO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
+import supportsystem.models.Vendedor;
 
 /**
  *
  * @author Bruno
  */
-public class MenuCliente extends javax.swing.JFrame {
+public class MenuVendedores extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuCliente() {
+    public MenuVendedores() {
         initComponents();
-        listarClientes();
+        listarVendedores();
     }
 
     /**
@@ -43,20 +45,18 @@ public class MenuCliente extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaClientes = new javax.swing.JTable();
+        tabelaVendedores = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Support System - Menu Clientes");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Clientes");
+        jLabel1.setText("Vendedores");
 
-        jButton3.setText("Cadastrar Cliente");
+        jButton3.setText("Cadastrar Vendedor");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -70,14 +70,14 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Deletar Cliente");
+        jButton7.setText("Deletar Vendedor");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaVendedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -85,7 +85,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "ID Cliente", "Nome Cliente", "Tipo Cliente"
+                "ID Vendedor", "Nome Vendedor", "Comissao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -96,7 +96,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabelaClientes);
+        jScrollPane1.setViewportView(tabelaVendedores);
 
         btnAtualizar.setText("Atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,12 +105,7 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel2.setText("Cliente tipo 1 - Pessoa Física; Cliente tipo 2 - Pessoa Juridica");
-
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
-
-        jLabel4.setText("OBS:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,11 +115,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(358, 358, 358)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -136,7 +127,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,11 +146,8 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(jButton6))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,18 +159,18 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        CadCliente frame = new CadCliente();
+        CadVendedor frame = new CadVendedor();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        DelCliente frame = new DelCliente();
+        DelVendedor frame = new DelVendedor();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        LogController.createLog("Listando produtos", "I");
-        listarClientes();
+        LogController.createLog("Listando Vendedores", "I");
+        listarVendedores();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     /**
@@ -202,14 +190,18 @@ public class MenuCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuVendedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuVendedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuVendedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuVendedores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -218,7 +210,7 @@ public class MenuCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuCliente().setVisible(true);
+                new MenuVendedores().setVisible(true);
             }
         });
     }
@@ -229,33 +221,31 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JTable tabelaVendedores;
     // End of variables declaration//GEN-END:variables
 
-    private void listarClientes() {
+    private void listarVendedores() {
         try {
             //ProdutoDAO produtodao = new ProdutoDAO();
-            ClienteDAO clientedao = new ClienteDAO();
-            DefaultTableModel model = (DefaultTableModel) tabelaClientes.getModel();
+            VendedorDAO vendedordao = new VendedorDAO();
+            DefaultTableModel model = (DefaultTableModel) tabelaVendedores.getModel();
 
             model.setNumRows(0);
-            List<Cliente> lista = clientedao.listarClientes();
+            List<Vendedor> lista = vendedordao.listarVendedores();
 
             for (int i = 0; i < lista.size(); i++) {
                 model.addRow(new Object[]{
-                    lista.get(i).getId_cliente(),
-                    lista.get(i).getNome_cliente(),
-                    lista.get(i).getId_tipo_cliente(),
+                    lista.get(i).getId_vendedor(),
+                    lista.get(i).getNome_vendedor(),
+                    lista.get(i).getPc_comissao(),
                 });
             }
 
         } catch (Exception ex) {
-            System.out.println("Erro ao Listar Clientes");
-            LogController.createLog("Erro ao Listar Clientes", "W");
+            System.out.println("Erro ao Listar Vendedores");
+            LogController.createLog("Erro ao Listar Vendedores", "W");
         }
     }
 

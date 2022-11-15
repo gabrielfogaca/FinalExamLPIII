@@ -53,6 +53,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Support System");
 
         jButton2.setText("Cadastrar Vendedores");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Menu de Produtos");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +160,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MenuProduto frame = new MenuProduto();
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        MenuVendedores frame = new MenuVendedores();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

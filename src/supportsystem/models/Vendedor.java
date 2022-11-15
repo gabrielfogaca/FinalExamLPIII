@@ -4,6 +4,15 @@ public class Vendedor {
 
     private int id_vendedor;
     private String nome_vendedor;
+    private int pc_comissao;
+
+    public int getPc_comissao() {
+        return pc_comissao;
+    }
+
+    public void setPc_comissao(int pc_comissao) {
+        this.pc_comissao = pc_comissao;
+    }
 
     public int getId_vendedor() {
         return id_vendedor;

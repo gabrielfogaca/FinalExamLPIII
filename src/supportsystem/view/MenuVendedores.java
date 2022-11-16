@@ -160,11 +160,13 @@ public class MenuVendedores extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadVendedor frame = new CadVendedor();
+        LogController.createLog("Abrindo página de cadastro de vendedor", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelVendedor frame = new DelVendedor();
+        LogController.createLog("Abrindo página de remoção de vendedor", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 

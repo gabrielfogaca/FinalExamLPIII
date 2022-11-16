@@ -172,11 +172,13 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadCliente frame = new CadCliente();
+        LogController.createLog("Abrindo página de cadastro de cliente", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelCliente frame = new DelCliente();
+        LogController.createLog("Abrindo página de remoção de cliente", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 

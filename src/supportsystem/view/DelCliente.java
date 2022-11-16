@@ -116,7 +116,9 @@ public class DelCliente extends javax.swing.JFrame {
             for (Cliente v : dao.listarClientes()) {
                 cbxCliente.addItem("Cliente ID: " + v.getId_cliente());
             }
+            LogController.createLog("Cliente deletado", "I");
         } catch (SQLException ex) {
+            LogController.createLog("Erro ao deletar cliente" + ex.getMessage(), "W");
             cbxCliente.addItem("0");
            // Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -151,6 +151,7 @@ public class MenuProduto extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelProduto frame = new DelProduto();
+        LogController.createLog("Abrindo página de remoção de produto", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 

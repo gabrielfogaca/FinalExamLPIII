@@ -113,7 +113,9 @@ public class DelProduto extends javax.swing.JFrame {
             for (ProdutoDTO v : dao.listarProduto()) {
                 cbxProduto.addItem("Produto ID: " + v.getId_item());
             }
+            LogController.createLog("Produto deletado", "W");
         } catch (SQLException ex) {
+            LogController.createLog("Erro ao deletar produto" + ex.getMessage(), "W");
             cbxProduto.addItem("0");
            // Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }

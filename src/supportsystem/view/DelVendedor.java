@@ -119,7 +119,9 @@ public class DelVendedor extends javax.swing.JFrame {
             for (Vendedor v : dao.listarVendedores()) {
                 cbxVendedor.addItem("Vendedor ID: " + v.getId_vendedor());
             }
+            LogController.createLog("Vendedor deletado", "I");
         } catch (SQLException ex) {
+            LogController.createLog("Erro ao deletar vendedor" + ex.getMessage(), "W");
             cbxVendedor.addItem("0");
            // Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }

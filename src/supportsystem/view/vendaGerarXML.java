@@ -184,12 +184,12 @@ public class vendaGerarXML extends javax.swing.JFrame {
             vendadto.setId_venda(venda);
 
             VendaDAO vendadao = new VendaDAO();
-
+            LogController.createLog("XML da venda gerado", "I");
             try {
                 vendadao.VendasXML(vendadto);
             } catch (SQLException ex) {
-                Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
-            };
+                LogController.createLog("Erro ao gerar XML da venda" + ex.getMessage(), "W");
+            }
         }
 
     }//GEN-LAST:event_btnGerarXMLActionPerformed

@@ -8,3 +8,4 @@ nbdist/
 .nb-gradle/
 *.log
 venda.xml
+*.log.*

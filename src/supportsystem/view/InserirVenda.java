@@ -227,7 +227,7 @@ public class InserirVenda extends javax.swing.JFrame {
         int id_cliente;
         int id_vendedor;
         float preco_item;
-        String qtd;
+        int qtd;
         float valor_total;
         int qtd_estoque;
 
@@ -242,7 +242,8 @@ public class InserirVenda extends javax.swing.JFrame {
         nome_item = produto.getNome_item();
         preco_item = produto.getPreco();
 
-        qtd = (String) cbxQtd.getSelectedItem();
+        qtd = cbxQtd.getSelectedIndex()+1;
+          
         valor_total = preco_item * Integer.valueOf(qtd);
 
         qtd_estoque = produto.getQtd() - Integer.valueOf(qtd);

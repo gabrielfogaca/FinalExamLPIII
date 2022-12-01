@@ -229,7 +229,7 @@ public class MenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        LogController.createLog("Listando produtos", "I");
+        LogController.createLog("Listando Clientes", "I");
         listarClientes();
     }//GEN-LAST:event_btnAtualizarActionPerformed
 

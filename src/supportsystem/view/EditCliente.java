@@ -164,6 +164,7 @@ public class EditCliente extends javax.swing.JFrame {
             Cliente cliente = new Cliente();
             ClienteDAO clienteDao = new ClienteDAO();
 
+            cliente.setId_cliente(idCliente);
             cliente.setNome_cliente(cbxNomeCliente.getText());
             if (rbtnTipoPf.isSelected()) {
                 cliente.setId_tipo_cliente(1);
@@ -171,8 +172,8 @@ public class EditCliente extends javax.swing.JFrame {
                 cliente.setId_tipo_cliente(2);
             }
             
-            clienteDao.inserirCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente inserido com sucesso!");
+            clienteDao.editarCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!");
 
         } catch (SQLException ex) {
             LogController.createLog("Erro ao cadastrar cliente", "W");
@@ -214,6 +215,7 @@ public class EditCliente extends javax.swing.JFrame {
 
     private void PopulateFields(Cliente Ccliente){
         cbxNomeClienteatual.setText(Ccliente.getNome_cliente());
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

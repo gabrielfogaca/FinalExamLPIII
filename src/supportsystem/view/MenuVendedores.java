@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ClienteDTO;
@@ -19,6 +20,7 @@ import supportsystem.dao.VendedorDAO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Vendedor;
+import java.lang.ArrayIndexOutOfBoundsException;
 
 /**
  *
@@ -192,8 +194,12 @@ public class MenuVendedores extends javax.swing.JFrame {
 
     private void jButtonEditClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditClienteActionPerformed
         EditVendedor frame = new EditVendedor();
-        frame.idVendedor = (int) tabelaVendedores.getValueAt(tabelaVendedores.getSelectedRow() , 0);
-        frame.setVisible(true);
+        try {
+            frame.idVendedor = (int) tabelaVendedores.getValueAt(tabelaVendedores.getSelectedRow() , 0);
+            frame.setVisible(true);
+        } catch(Exception e) {
+         JOptionPane.showMessageDialog(null, "Selecione um vendedor para editar!");  
+        }
     }//GEN-LAST:event_jButtonEditClienteActionPerformed
 
     /**

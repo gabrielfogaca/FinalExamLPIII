@@ -35,4 +35,13 @@ public class Vendedor {
         return this.getNome_vendedor();
     }
 
+    public Vendedor(int id_vendedor, String nome_vendedor, int pc_comissao) {
+        this.id_vendedor = id_vendedor;
+        this.nome_vendedor = nome_vendedor;
+        this.pc_comissao = pc_comissao;
+    }
+    
+    public Vendedor(){
+    }
+
 }

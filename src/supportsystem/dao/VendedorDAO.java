@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import supportsystem.database.DataBase;
 import supportsystem.logging.LogController;
+import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
 import supportsystem.models.Vendedor;
 
@@ -78,4 +79,50 @@ public class VendedorDAO {
         return null;
     }
 
+    public Vendedor buscarVendedor(int vendedorid) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("select * from vendedor where id_vendedor = ?");
+            pstmt.setInt(1,vendedorid);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+            Vendedor vendedor = new Vendedor(rs.getInt("id_vendedor"), rs.getString("nome_vendedor"), rs.getInt("pc_comissao"));
+            
+            return vendedor;
+            
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
+    }
+     
+     public void editarVendedor(Vendedor vendedor) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("update vendedor set nome_vendedor = ?, pc_comissao = ? where id_vendedor = ?");
+            pstmt.setString(1, vendedor.getNome_vendedor());
+            pstmt.setInt(2, vendedor.getPc_comissao());
+            pstmt.setInt(3, vendedor.getId_vendedor());
+            pstmt.execute();
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela CLIENTE do banco de dados. " + ex.getMessage(), "S");
+        } finally {
+            db.close();
+        }
+    }
 }

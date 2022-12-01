@@ -5,6 +5,9 @@
  */
 package supportsystem.view;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -48,6 +51,8 @@ public class MenuVendedores extends javax.swing.JFrame {
         tabelaVendedores = new javax.swing.JTable();
         btnAtualizar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButtonEditCliente = new javax.swing.JButton();
+        cbxidVendedores = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Support System - Menu Clientes");
@@ -107,6 +112,28 @@ public class MenuVendedores extends javax.swing.JFrame {
 
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
 
+        jButtonEditCliente.setText("Editar Vendedores");
+        jButtonEditCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditClienteActionPerformed(evt);
+            }
+        });
+
+        cbxidVendedores.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbxidVendedoresAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        cbxidVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxidVendedoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,11 +149,14 @@ public class MenuVendedores extends javax.swing.JFrame {
                         .addGap(341, 341, 341)
                         .addComponent(btnAtualizar))
                     .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButtonEditCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxidVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,12 +172,16 @@ public class MenuVendedores extends javax.swing.JFrame {
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton7)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbxidVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEditCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +208,29 @@ public class MenuVendedores extends javax.swing.JFrame {
         LogController.createLog("Listando Vendedores", "I");
         listarVendedores();
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void jButtonEditClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditClienteActionPerformed
+        EditVendedor frame = new EditVendedor();
+        frame.idVendedor = cbxidVendedores.getSelectedIndex()+1;
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButtonEditClienteActionPerformed
+
+    private void cbxidVendedoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxidVendedoresAncestorAdded
+        // MOSTRAR OS ID'S DOS VENDEDORES
+        VendedorDAO dao = new VendedorDAO();
+        cbxidVendedores.removeAll();
+        try {
+            for (Vendedor v : dao.listarVendedores()) {
+                cbxidVendedores.addItem("ID Vendedor: " + v.getId_vendedor());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbxidVendedoresAncestorAdded
+
+    private void cbxidVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxidVendedoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxidVendedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,9 +276,11 @@ public class MenuVendedores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JComboBox<String> cbxidVendedores;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonEditCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

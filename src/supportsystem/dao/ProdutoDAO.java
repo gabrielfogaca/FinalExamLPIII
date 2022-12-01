@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
+import supportsystem.models.Vendedor;
 
 public class ProdutoDAO {
 
@@ -112,4 +113,51 @@ public class ProdutoDAO {
         return null;
     }
 
+     public Produto buscarProduto(int produtoid) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("select * from item where id_item = ?");
+            pstmt.setInt(1,produtoid);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+            Produto produto = new Produto(rs.getInt("id_item"), rs.getString("nome_item"), rs.getInt("preco"), rs.getInt("qtde_estoque"));
+            
+            return produto;
+            
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
+    }
+     
+     public void editarProduto(Produto produto) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("update item set nome_item = ?, preco = ? where id_item = ?");
+            pstmt.setString(1, produto.getNome_item());
+            pstmt.setInt(2, (int) produto.getPreco());
+            pstmt.setInt(3, produto.getId_item());
+            pstmt.execute();
+            System.out.println(pstmt);
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            LogController.createLog("Erro ao conectar-se na tabela ITEM do banco de dados. " + ex.getMessage(), "S");
+        } finally {
+            db.close();
+        }
+    }
 }

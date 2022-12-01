@@ -43,4 +43,15 @@ public class Produto {
     public String toString(){
         return this.getNome_item();
     }
+
+    public Produto(int id_item, String nome_item, float preco, int qtd) {
+        this.id_item = id_item;
+        this.nome_item = nome_item;
+        this.preco = preco;
+        this.qtd = qtd;
+    }
+    
+    public Produto(){
+        
+    }
 }

@@ -129,7 +129,6 @@ public class DelCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxClienteActionPerformed
 
     private void btnGerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarXMLActionPerformed
-        // GERAR O XML A PARTIR DO SELECT DA COMBOBOX
         Object selectedItem = cbxCliente.getSelectedItem();
         if (selectedItem != null) {
             String selectedItemStr = selectedItem.toString();

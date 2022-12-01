@@ -34,4 +34,13 @@ public class Cliente {
     public String toString() {
         return this.getNome_cliente();
     }
+
+    public Cliente(int id_cliente, String nome_cliente, int id_tipo_cliente) {
+        this.id_cliente = id_cliente;
+        this.nome_cliente = nome_cliente;
+        this.id_tipo_cliente = id_tipo_cliente;
+    }
+
+    public Cliente() {
+    }
 }

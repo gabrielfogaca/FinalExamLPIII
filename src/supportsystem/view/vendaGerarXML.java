@@ -210,7 +210,6 @@ public class vendaGerarXML extends javax.swing.JFrame {
             cbxVenda.addItem("0");
             Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_cbxVendaAncestorAdded
     /**
      * @param args the command line arguments

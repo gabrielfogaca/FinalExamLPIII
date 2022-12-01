@@ -76,4 +76,34 @@ public class ClienteDAO {
         }
         return null;
     }
+    
+     public Cliente buscarCliente(int clienteid) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("select * from cliente where id_cliente = ?");
+            pstmt.setInt(1,clienteid);
+            rs = pstmt.executeQuery();
+            
+            //System.out.println(rs.getInt("id_cliente"));
+
+            while (rs.next()) {
+
+            Cliente cliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"));
+            
+            return cliente;
+            
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
+    }
+    
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import supportsystem.database.DataBase;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
@@ -61,22 +62,22 @@ public class VendedorDAO {
         }
     }
     
-    public ArrayList<VendedorDTO> deleteVendedor(VendedorDTO vendedordto) throws SQLException {
+    public boolean deleteVendedor(Vendedor vendedor) throws SQLException {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             pstmt = db.getConnection().prepareStatement("delete from vendedor where id_vendedor = ?");
-            pstmt.setInt(1,vendedordto.getId_vendedor());
+            pstmt.setInt(1,vendedor.getId_vendedor());
             pstmt.execute();
 
         } catch (SQLException ex) {
-            System.out.println(ex);
+            return false;
         } finally {
             db.close();
         }
-        return null;
+        return true;
     }
 
     public Vendedor buscarVendedor(int vendedorid) throws SQLException {

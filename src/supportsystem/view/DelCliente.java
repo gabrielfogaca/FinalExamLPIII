@@ -33,6 +33,14 @@ public class DelCliente extends javax.swing.JFrame {
     public DelCliente() {
         initComponents();
     }
+    
+    /**
+     * Creates new form CadCliente
+     */
+    private Cliente cliente;
+    
+
+    public int idCliente;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,34 +53,48 @@ public class DelCliente extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        cbxCliente = new javax.swing.JComboBox<>();
         btnGerarXML = new javax.swing.JButton();
+        cbxNomeClienteatual = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SupportSystem - Cadastro de Produtos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Deletar Produto");
+        jLabel1.setText("Deletar Cliente");
 
-        cbxCliente.addAncestorListener(new javax.swing.event.AncestorListener() {
+        btnGerarXML.setText("Sim");
+        btnGerarXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarXMLActionPerformed(evt);
+            }
+        });
+
+        cbxNomeClienteatual.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                cbxClienteAncestorAdded(evt);
+                cbxNomeClienteatualAncestorAdded(evt);
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        cbxCliente.addActionListener(new java.awt.event.ActionListener() {
+        cbxNomeClienteatual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxClienteActionPerformed(evt);
+                cbxNomeClienteatualActionPerformed(evt);
             }
         });
 
-        btnGerarXML.setText("Deletar Cliente");
-        btnGerarXML.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setText("Deseja deletar o(a) Cliente:");
+
+        jLabel5.setText("?");
+
+        jButton7.setText("Não");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerarXMLActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -81,80 +103,96 @@ public class DelCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(110, 110, 110))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxNomeClienteatual, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnGerarXML, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64))))
+                        .addComponent(btnGerarXML, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGerarXML))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(cbxNomeClienteatual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGerarXML)
+                    .addComponent(jButton7))
+                .addGap(23, 23, 23))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxClienteAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxClienteAncestorAdded
-        // MOSTRAR OS ID'S DAS VENDAS
-        ClienteDAO dao = new ClienteDAO();
-        cbxCliente.removeAll();
-        try {
-            for (Cliente v : dao.listarClientes()) {
-                cbxCliente.addItem("Cliente ID: " + v.getId_cliente());
-            }
-            LogController.createLog("Cliente deletado", "I");
-        } catch (SQLException ex) {
-            LogController.createLog("Erro ao deletar cliente" + ex.getMessage(), "W");
-            cbxCliente.addItem("0");
-           // Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cbxClienteAncestorAdded
-
-    private void cbxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxClienteActionPerformed
-
     private void btnGerarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarXMLActionPerformed
-        Object selectedItem = cbxCliente.getSelectedItem();
+        try {
+            Cliente cliente = new Cliente();
+            ClienteDAO clienteDao = new ClienteDAO();
+
+            cliente.setId_cliente(idCliente);
+            
+            clienteDao.deletarCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso!");
+
+        } catch (SQLException ex) {
+            LogController.createLog("Erro ao deletar cliente", "W");
+        }
+        LogController.createLog("Cliente deletado", "I");
+    }//GEN-LAST:event_btnGerarXMLActionPerformed
+
+    private void cbxNomeClienteatualAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxNomeClienteatualAncestorAdded
+        cbxNomeClienteatual.setEditable(false);
+        cbxNomeClienteatual.removeAll();
+        Object selectedItem = idCliente;
         if (selectedItem != null) {
-            String selectedItemStr = selectedItem.toString();
-            String strMain = (String) selectedItem;
-            String arrSplit = strMain.substring(strMain.lastIndexOf(' ') + 1);
-            Integer.valueOf(arrSplit);
-
-            String id_cliente = arrSplit;
-            int cliente = Integer.valueOf(id_cliente);
-
+            int clienteid = idCliente;
 
             ClienteDTO clientedto = new ClienteDTO();
-
-            clientedto.setId_cliente(cliente);
 
             ClienteDAO clientedao = new ClienteDAO();
 
             try {
-                clientedao.deleteCliente(clientedto);
-                JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso!");
+                Cliente Ccliente = clientedao.buscarCliente(clienteid);
+                this.cliente = Ccliente;
+                PopulateFields(Ccliente);
+                //cbxNomeClienteatual.();
+
             } catch (SQLException ex) {
                 //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
             };
         }
-    }//GEN-LAST:event_btnGerarXMLActionPerformed
 
+    }//GEN-LAST:event_cbxNomeClienteatualAncestorAdded
+
+    private void cbxNomeClienteatualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomeClienteatualActionPerformed
+
+    }//GEN-LAST:event_cbxNomeClienteatualActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+private void PopulateFields(Cliente Ccliente){
+        cbxNomeClienteatual.setText(Ccliente.getNome_cliente());
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -195,12 +233,17 @@ public class DelCliente extends javax.swing.JFrame {
                 new DelCliente().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGerarXML;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbxCliente;
+    private javax.swing.JTextField cbxNomeClienteatual;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
+

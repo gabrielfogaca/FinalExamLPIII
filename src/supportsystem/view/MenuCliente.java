@@ -103,6 +103,7 @@ public class MenuCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaClientes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabelaClientes);
 
         btnAtualizar.setText("Atualizar");
@@ -196,7 +197,12 @@ public class MenuCliente extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelCliente frame = new DelCliente();
         LogController.createLog("Abrindo página de remoção de cliente", "I");
-        frame.setVisible(true);
+        try {
+            frame.idCliente = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow() , 0);
+            frame.setVisible(true);
+        } catch(Exception e) {
+         JOptionPane.showMessageDialog(null, "Selecione um cliente para Deletar!");  
+        }  
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

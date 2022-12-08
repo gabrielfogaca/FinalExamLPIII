@@ -59,14 +59,14 @@ public class ClienteDAO {
         }
     }
     
-    public ArrayList<ClienteDTO> deleteCliente(ClienteDTO clientedto) throws SQLException {
+   public void deletarCliente(Cliente cliente) throws SQLException {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             pstmt = db.getConnection().prepareStatement("delete from cliente where id_cliente = ?");
-            pstmt.setInt(1,clientedto.getId_cliente());
+            pstmt.setInt(1, cliente.getId_cliente());
             pstmt.execute();
 
         } catch (SQLException ex) {
@@ -74,7 +74,6 @@ public class ClienteDAO {
         } finally {
             db.close();
         }
-        return null;
     }
     
      public Cliente buscarCliente(int clienteid) throws SQLException {

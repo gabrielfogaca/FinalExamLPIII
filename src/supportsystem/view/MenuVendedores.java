@@ -184,7 +184,12 @@ public class MenuVendedores extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelVendedor frame = new DelVendedor();
         LogController.createLog("Abrindo página de remoção de vendedor", "I");
-        frame.setVisible(true);
+        try {
+            frame.idVendedor = (int) tabelaVendedores.getValueAt(tabelaVendedores.getSelectedRow() , 0);
+            frame.setVisible(true);
+        } catch(Exception e) {
+         JOptionPane.showMessageDialog(null, "Selecione um vendedor para editar!");  
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

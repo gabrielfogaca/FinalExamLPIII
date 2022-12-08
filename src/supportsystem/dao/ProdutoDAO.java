@@ -95,14 +95,14 @@ public class ProdutoDAO {
 
     }
     
-    public ArrayList<ProdutoDTO> deleteProduto(ProdutoDTO produtodto) throws SQLException {
+     public void deletarProduto(Produto produto) throws SQLException {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             pstmt = db.getConnection().prepareStatement("delete from item where id_item = ?");
-            pstmt.setInt(1,produtodto.getId_item());
+            pstmt.setInt(1,produto.getId_item());
             pstmt.execute();
 
         } catch (SQLException ex) {
@@ -110,7 +110,6 @@ public class ProdutoDAO {
         } finally {
             db.close();
         }
-        return null;
     }
 
      public Produto buscarProduto(int produtoid) throws SQLException {

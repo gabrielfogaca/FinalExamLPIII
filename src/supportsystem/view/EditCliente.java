@@ -172,12 +172,16 @@ public class EditCliente extends javax.swing.JFrame {
                 cliente.setId_tipo_cliente(2);
             }
             
+            if (cliente.getNome_cliente().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "É necessario inserir o novo nome e tipo para o cliente!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!");
+            }
             clienteDao.editarCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!");
-
         } catch (SQLException ex) {
             LogController.createLog("Erro ao cadastrar cliente", "W");
         }
+        
         LogController.createLog("Cliente cadastrado", "I");
     }//GEN-LAST:event_btnEditClienteActionPerformed
 

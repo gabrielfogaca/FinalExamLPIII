@@ -91,6 +91,7 @@ public class MenuProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaProdutos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabelaProdutos);
 
         btnAtualizar.setText("Atualizar");
@@ -168,7 +169,12 @@ public class MenuProduto extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         DelProduto frame = new DelProduto();
         LogController.createLog("Abrindo página de remoção de produto", "I");
-        frame.setVisible(true);
+        try {
+            frame.idProduto = (int) tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow() , 0);
+            frame.setVisible(true);
+        } catch(Exception e) {
+         JOptionPane.showMessageDialog(null, "Selecione um produto para editar!");  
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed

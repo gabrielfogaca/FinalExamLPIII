@@ -13,7 +13,8 @@ DROP TABLE VENDEDOR;
 DROP TABLE GRUPO;
 DROP TABLE ITEM;
 DROP TABLE VENDA;
-DROP TABLE item_venda;*/
+DROP TABLE item_venda;
+DROP TABLE usuario;*/
 
 
 /* Cria tabela de tipo_cliente */
@@ -21,6 +22,14 @@ CREATE TABLE tipo_cliente (
 	id_tipo_cliente    INT 	NOT NULL	auto_increment,
 	descr_tipo_cliente  VARCHAR(30),
 PRIMARY KEY(id_tipo_cliente));
+
+/* Cria tabela de usuario */
+CREATE TABLE usuario (
+	id_usuario   INT 	NOT NULL	auto_increment,
+	login  CHAR(30) NOT NULL,
+    senha VARCHAR(30) NOT NULL,
+PRIMARY KEY(id_usuario),
+UNIQUE KEY(login));
 
 /* Cria tabela de cliente      */
 CREATE TABLE CLIENTE (
@@ -102,6 +111,8 @@ insert into cliente values (2,'Lucas Mercedes',1);
 insert into cliente values (3,'Bernardo Uhklith',2);
 insert into cliente values (4,'Adriana Flickthy',1);
 insert into cliente values (5,'Aline Liros',2);
+
+insert into usuario values(1,'admin', 'admin');
 
 insert into vendedor values (1,'Joao',5.00);
 insert into vendedor values (2,'Bruninho',10.00);

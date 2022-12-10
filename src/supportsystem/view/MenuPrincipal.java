@@ -19,7 +19,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         LogController.createLog("Iniciando programa", "I");
         initComponents();
+        VerificarAuth();
     }
+    
+    public int idusuario;
+    public String loginusuario;
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,9 +157,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       LogController.createLog("Encerrando sistema", "I");
-        System.exit(0);
-       
+       LogController.createLog("Realizando Log-out sistema", "I");
+       Login frame = new Login();
+       frame.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -211,4 +218,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private boolean VerificarAuth() {
+        Integer authenticationid = idusuario;
+        String authenticationlogin = loginusuario;
+        
+        if (authenticationid != null && authenticationlogin != null) {
+            return true;
+        } else {
+            dispose();
+        }
+        return false;
+    }
 }

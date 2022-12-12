@@ -34,6 +34,8 @@ public class InserirVenda extends javax.swing.JFrame {
         initComponents();
     }
 
+    public int idusuario;
+    public String loginusuario;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +55,8 @@ public class InserirVenda extends javax.swing.JFrame {
         btnValidar = new javax.swing.JButton();
         cbxQtd = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sistema de Vendas");
@@ -120,10 +124,30 @@ public class InserirVenda extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Inserir Venda");
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel5.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -147,16 +171,20 @@ public class InserirVenda extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1)
+                            .addComponent(btnValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(112, 112, 112))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClienteLabel)
                     .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,6 +309,16 @@ public class InserirVenda extends javax.swing.JFrame {
             cbxQtd.addItem(i);
         }
     }//GEN-LAST:event_cbxProdutoItemStateChanged
+
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
     /**
      * @param args the command line arguments
      */
@@ -323,7 +361,11 @@ public class InserirVenda extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ClienteLabel;
     private javax.swing.JLabel FuncionarioLabel;
@@ -335,6 +377,8 @@ public class InserirVenda extends javax.swing.JFrame {
     private javax.swing.JComboBox cbxQtd;
     private javax.swing.JComboBox cbxVendedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomeUsuario;
     // End of variables declaration//GEN-END:variables
 
 }

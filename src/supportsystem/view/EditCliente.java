@@ -13,9 +13,12 @@ import javax.swing.JTextField;
 import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ClienteDTO;
 import supportsystem.dao.ProdutoDAO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
+import supportsystem.models.Usuario;
 
 /**
  *
@@ -27,12 +30,16 @@ public class EditCliente extends javax.swing.JFrame {
      * Creates new form CadCliente
      */
     private Cliente cliente;
+    private Usuario usuario;
     
     public EditCliente() {
         initComponents();
     }
 
     public int idCliente;
+    
+    public int idusuario;
+    public String loginusuario;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +60,8 @@ public class EditCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cbxNomeClienteatual = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +107,20 @@ public class EditCliente extends javax.swing.JFrame {
 
         jLabel4.setText("Nome atual:");
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel5.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,13 +152,22 @@ public class EditCliente extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
-                                    .addComponent(cbxNomeClienteatual, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(cbxNomeClienteatual, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -150,7 +182,7 @@ public class EditCliente extends javax.swing.JFrame {
                     .addComponent(rbtnTipoPf)
                     .addComponent(rbtnTipoPj)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btnEditCliente)
                 .addGap(19, 19, 19))
         );
@@ -166,6 +198,8 @@ public class EditCliente extends javax.swing.JFrame {
 
             cliente.setId_cliente(idCliente);
             cliente.setNome_cliente(cbxNomeCliente.getText());
+            cliente.setId_operador(idusuario);
+            System.out.println(idusuario);
             if (rbtnTipoPf.isSelected()) {
                 cliente.setId_tipo_cliente(1);
             } else if (rbtnTipoPj.isSelected()) {
@@ -175,14 +209,14 @@ public class EditCliente extends javax.swing.JFrame {
             if (cliente.getNome_cliente().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "É necessario inserir o novo nome e tipo para o cliente!");
             }else{
-                JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Cliente editado com sucesso!"); 
             }
             clienteDao.editarCliente(cliente);
         } catch (SQLException ex) {
             LogController.createLog("Erro ao cadastrar cliente", "W");
         }
         
-        LogController.createLog("Cliente cadastrado", "I");
+        LogController.createLog("Cliente Editado", "I");
     }//GEN-LAST:event_btnEditClienteActionPerformed
 
     private void rbtnTipoPfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTipoPfActionPerformed
@@ -208,7 +242,6 @@ public class EditCliente extends javax.swing.JFrame {
                 Cliente Ccliente = clientedao.buscarCliente(clienteid);
                 this.cliente = Ccliente;
                 PopulateFields(Ccliente);
-                //cbxNomeClienteatual.();
                 
             } catch (SQLException ex) {
                 //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
@@ -217,10 +250,34 @@ public class EditCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cbxNomeClienteatualAncestorAdded
 
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+            
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+            try {
+                Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+                this.usuario = Uusuario;
+                idusuario = Uusuario.getId_usuario();
+            } catch (SQLException ex) {
+                //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+            };
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {  
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
+
     private void PopulateFields(Cliente Ccliente){
         cbxNomeClienteatual.setText(Ccliente.getNome_cliente());
-        
     }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditCliente;
@@ -231,6 +288,8 @@ public class EditCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JRadioButton rbtnTipoPf;
     private javax.swing.JRadioButton rbtnTipoPj;
     // End of variables declaration//GEN-END:variables

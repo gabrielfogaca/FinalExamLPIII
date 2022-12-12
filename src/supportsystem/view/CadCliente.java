@@ -8,14 +8,19 @@ package supportsystem.view;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import supportsystem.dao.ClienteDAO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
+import supportsystem.models.Usuario;
 
 /**
  *
  * @author Bruno
  */
 public class CadCliente extends javax.swing.JFrame {
+
+    private Usuario usuario;
 
     /**
      * Creates new form CadCliente
@@ -24,6 +29,9 @@ public class CadCliente extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+    public int idusuario;
+    public String loginusuario;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +49,8 @@ public class CadCliente extends javax.swing.JFrame {
         rbtnTipoPf = new javax.swing.JRadioButton();
         rbtnTipoPj = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -69,6 +79,20 @@ public class CadCliente extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo:");
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel5.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,15 +119,24 @@ public class CadCliente extends javax.swing.JFrame {
                                     .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(btnCadCliente)))
+                        .addComponent(btnCadCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(52, 52, 52)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbxNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,7 +145,7 @@ public class CadCliente extends javax.swing.JFrame {
                     .addComponent(rbtnTipoPf)
                     .addComponent(rbtnTipoPj)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btnCadCliente)
                 .addGap(19, 19, 19))
         );
@@ -125,7 +158,7 @@ public class CadCliente extends javax.swing.JFrame {
         try {
             Cliente cliente = new Cliente();
             ClienteDAO clienteDao = new ClienteDAO();
-
+            cliente.setId_operador(idusuario);
             cliente.setNome_cliente(cbxNomeCliente.getText());
             if (rbtnTipoPf.isSelected()) {
                 cliente.setId_tipo_cliente(1);
@@ -145,6 +178,26 @@ public class CadCliente extends javax.swing.JFrame {
     private void rbtnTipoPfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTipoPfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbtnTipoPfActionPerformed
+
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+            
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+            try {
+                Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+                this.usuario = Uusuario;
+                idusuario = Uusuario.getId_usuario();
+            } catch (SQLException ex) {
+                //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+            };
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {  
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -180,6 +233,11 @@ public class CadCliente extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadCliente;
@@ -188,6 +246,8 @@ public class CadCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JRadioButton rbtnTipoPf;
     private javax.swing.JRadioButton rbtnTipoPj;
     // End of variables declaration//GEN-END:variables

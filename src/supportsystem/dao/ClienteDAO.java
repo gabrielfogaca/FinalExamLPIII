@@ -46,9 +46,10 @@ public class ClienteDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("INSERT INTO cliente (nome_cliente, id_tipo_cliente) VALUES (?, ?)");
+            pstmt = db.getConnection().prepareStatement("INSERT INTO cliente (nome_cliente, id_tipo_cliente, id_operador) VALUES (?, ?, ?)");
             pstmt.setString(1, cliente.getNome_cliente());
             pstmt.setInt(2, cliente.getId_tipo_cliente());
+            pstmt.setInt(3, cliente.getId_operador());
             pstmt.execute();
 
         } catch (SQLException ex) {
@@ -76,7 +77,7 @@ public class ClienteDAO {
         }
     }
     
-     public Cliente buscarCliente(int clienteid) throws SQLException {
+    public Cliente buscarCliente(int clienteid) throws SQLException {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -88,7 +89,7 @@ public class ClienteDAO {
 
             while (rs.next()) {
 
-            Cliente cliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"));
+            Cliente cliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"), rs.getInt("id_operador"));
             
             return cliente;
             
@@ -109,10 +110,11 @@ public class ClienteDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("update cliente set nome_cliente = ?, id_tipo_cliente = ? where id_cliente = ?");
+            pstmt = db.getConnection().prepareStatement("update cliente set nome_cliente = ?, id_tipo_cliente = ?, id_operador = ? where id_cliente = ?");
             pstmt.setString(1, cliente.getNome_cliente());
             pstmt.setInt(2, cliente.getId_tipo_cliente());
-            pstmt.setInt(3, cliente.getId_cliente());
+            pstmt.setInt(3, cliente.getId_operador());
+            pstmt.setInt(4, cliente.getId_cliente());
             pstmt.execute();
             
         } catch (SQLException ex) {

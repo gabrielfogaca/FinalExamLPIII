@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(cbxSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLogar)
                     .addComponent(btnCloseLogin))
                 .addGap(18, 18, 18)
@@ -179,7 +179,6 @@ public class Login extends javax.swing.JFrame {
             }else if(usuario.getSenha().isEmpty()){
                 JOptionPane.showMessageDialog(null, "É necessario inserir a senha!");
             }else if(usuarioDAO.logar(usuario)) {
-                System.out.println(usuario.getId_usuario());
                 JOptionPane.showMessageDialog(null, "Login realizado!");
                 MenuPrincipal frame = new MenuPrincipal();
                 frame.idusuario = usuario.getId_usuario();
@@ -244,8 +243,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseLogin;
     private javax.swing.JButton btnLogar;
-    private javax.swing.JTextField cbxNovoNomeProduto;
-    private javax.swing.JTextField cbxNovoNomeProduto1;
     private javax.swing.JTextField cbxSenha;
     private javax.swing.JTextField cbxUsuario;
     private javax.swing.JLabel jLabel1;

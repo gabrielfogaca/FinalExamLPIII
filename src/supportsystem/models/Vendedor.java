@@ -5,6 +5,7 @@ public class Vendedor {
     private int id_vendedor;
     private String nome_vendedor;
     private int pc_comissao;
+    private int id_operador;
 
     public int getPc_comissao() {
         return pc_comissao;
@@ -35,10 +36,21 @@ public class Vendedor {
         return this.getNome_vendedor();
     }
 
-    public Vendedor(int id_vendedor, String nome_vendedor, int pc_comissao) {
+    public int getId_operador() {
+        return id_operador;
+    }
+
+    public void setId_operador(int id_operador) {
+        this.id_operador = id_operador;
+    }
+    
+    
+
+    public Vendedor(int id_vendedor, String nome_vendedor, int pc_comissao, int id_operador) {
         this.id_vendedor = id_vendedor;
         this.nome_vendedor = nome_vendedor;
         this.pc_comissao = pc_comissao;
+        this.id_operador = id_operador;
     }
     
     public Vendedor(){

@@ -6,6 +6,7 @@ public class Produto {
     private String nome_item;
     private float preco;
     private int qtd;
+    private int id_operador;
 
     public int getId_item() {
         return id_item;
@@ -44,11 +45,20 @@ public class Produto {
         return this.getNome_item();
     }
 
-    public Produto(int id_item, String nome_item, float preco, int qtd) {
+    public int getId_operador() {
+        return id_operador;
+    }
+
+    public void setId_operador(int id_operador) {
+        this.id_operador = id_operador;
+    }
+
+    public Produto(int id_item, String nome_item, float preco, int qtd, int id_operador) {
         this.id_item = id_item;
         this.nome_item = nome_item;
         this.preco = preco;
         this.qtd = qtd;
+        this.id_operador = id_operador;
     }
     
     public Produto(){

@@ -35,6 +35,8 @@ public class MenuCliente extends javax.swing.JFrame {
         listarClientes();
     }
 
+    public int idusuario;
+    public String loginusuario;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +57,9 @@ public class MenuCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButtonEditCliente = new javax.swing.JButton();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cbxUsuarioLogado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Support System - Menu Clientes");
@@ -127,6 +132,35 @@ public class MenuCliente extends javax.swing.JFrame {
             }
         });
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel5.setText("Usuario:");
+
+        cbxUsuarioLogado.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cbxUsuarioLogadoAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        cbxUsuarioLogado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxUsuarioLogadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,7 +179,13 @@ public class MenuCliente extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(341, 341, 341)
                         .addComponent(btnAtualizar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbxUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
@@ -157,7 +197,15 @@ public class MenuCliente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbxUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnAtualizar))
@@ -177,7 +225,7 @@ public class MenuCliente extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,6 +238,8 @@ public class MenuCliente extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadCliente frame = new CadCliente();
+        frame.idusuario = idusuario;
+        frame.loginusuario = loginusuario;
         LogController.createLog("Abrindo página de cadastro de cliente", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -214,11 +264,31 @@ public class MenuCliente extends javax.swing.JFrame {
         EditCliente frame = new EditCliente();
         try {
             frame.idCliente = (int) tabelaClientes.getValueAt(tabelaClientes.getSelectedRow() , 0);
+            frame.loginusuario = loginusuario;
             frame.setVisible(true);
         } catch(Exception e) {
          JOptionPane.showMessageDialog(null, "Selecione um cliente para editar!");  
         }  
     }//GEN-LAST:event_jButtonEditClienteActionPerformed
+
+    private void cbxUsuarioLogadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxUsuarioLogadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxUsuarioLogadoActionPerformed
+
+    private void cbxUsuarioLogadoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_cbxUsuarioLogadoAncestorAdded
+        cbxUsuarioLogado.setEditable(false);
+        cbxUsuarioLogado.removeAll();
+        String usuario = loginusuario;
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {
+            
+        }
+    }//GEN-LAST:event_cbxUsuarioLogadoAncestorAdded
+
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -260,6 +330,7 @@ public class MenuCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JTextField cbxUsuarioLogado;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -268,6 +339,8 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaClientes;
     // End of variables declaration//GEN-END:variables
@@ -293,6 +366,10 @@ public class MenuCliente extends javax.swing.JFrame {
             System.out.println("Erro ao Listar Clientes");
             LogController.createLog("Erro ao Listar Clientes", "W");
         }
+    }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
     }
 
 }

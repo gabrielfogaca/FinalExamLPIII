@@ -92,7 +92,7 @@ public class VendedorDAO {
 
             while (rs.next()) {
 
-            Vendedor vendedor = new Vendedor(rs.getInt("id_vendedor"), rs.getString("nome_vendedor"), rs.getInt("pc_comissao"));
+            Vendedor vendedor = new Vendedor(rs.getInt("id_vendedor"), rs.getString("nome_vendedor"), rs.getInt("pc_comissao"), rs.getInt("id_operador"));
             
             return vendedor;
             

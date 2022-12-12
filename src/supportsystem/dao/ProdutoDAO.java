@@ -124,7 +124,7 @@ public class ProdutoDAO {
 
             while (rs.next()) {
 
-            Produto produto = new Produto(rs.getInt("id_item"), rs.getString("nome_item"), rs.getInt("preco"), rs.getInt("qtde_estoque"));
+            Produto produto = new Produto(rs.getInt("id_item"), rs.getString("nome_item"), rs.getInt("preco"), rs.getInt("qtde_estoque"), rs.getInt("id_operador"));
             
             return produto;
             

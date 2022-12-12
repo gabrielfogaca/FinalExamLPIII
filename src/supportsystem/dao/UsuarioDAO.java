@@ -23,8 +23,9 @@ public class UsuarioDAO {
             pstmt.setString(1, usuario.getLogin());
             pstmt.setString(2, usuario.getSenha());
             rs = pstmt.executeQuery();
-  
+
             if(rs.next()){
+                
                 return true;
             } else{
                 return false;
@@ -35,6 +36,34 @@ public class UsuarioDAO {
             db.close();
         }
         
+    }
+    
+
+    public Usuario buscarIDusuario(String loginusuario) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("select * from usuario where login = ?");
+            pstmt.setString(1,loginusuario);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+            Usuario usuario = new Usuario(rs.getInt("id_usuario"), rs.getString("login"), rs.getString("senha"));
+            
+            return usuario;
+            
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
     }
     
 }

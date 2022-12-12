@@ -6,6 +6,7 @@ public class Venda {
     private String nome_item;
     private float preco;
     private int qtd;
+    private int id_operador;
 
     public String getNome_item() {
         return nome_item;
@@ -38,4 +39,13 @@ public class Venda {
     public void setId_venda(int id_venda) {
         this.id_venda = id_venda;
     }
+
+    public int getId_operador() {
+        return id_operador;
+    }
+
+    public void setId_operador(int id_operador) {
+        this.id_operador = id_operador;
+    }
+    
 }

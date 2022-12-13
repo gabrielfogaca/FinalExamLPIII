@@ -117,12 +117,42 @@ public class ClienteDAO {
             pstmt.setInt(4, cliente.getId_cliente());
             pstmt.execute();
             
+            
+            
         } catch (SQLException ex) {
             System.out.println(ex);
             LogController.createLog("Erro ao conectar-se na tabela CLIENTE do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }
+    }
+     
+     
+     public Cliente ProcurarClienteParaTeste(int clienteid) throws SQLException {
+        DataBase db = new DataBase();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            pstmt = db.getConnection().prepareStatement("select * from cliente where id_cliente = ?");
+            pstmt.setInt(1,clienteid);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+            Cliente testeCliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"), rs.getInt("id_operador"));
+            
+            return testeCliente;
+            
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            db.close();
+        }
+        return null;
     }
     
 }

@@ -47,10 +47,11 @@ public class ProdutoDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("INSERT INTO item (nome_item, preco, qtde_estoque) VALUES (?, ?, ?)");
+            pstmt = db.getConnection().prepareStatement("INSERT INTO item (nome_item, preco, qtde_estoque,id_operador) VALUES (?, ?, ?,?)");
             pstmt.setString(1, produto.getNome_item());
             pstmt.setFloat(2,produto.getPreco());
             pstmt.setInt(3,produto.getQtd());
+            pstmt.setInt(4,produto.getId_operador());
             pstmt.execute();
 
         } catch (SQLException ex) {
@@ -145,10 +146,11 @@ public class ProdutoDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("update item set nome_item = ?, preco = ? where id_item = ?");
+            pstmt = db.getConnection().prepareStatement("update item set nome_item = ?, preco = ?, id_operador = ? where id_item = ?");
             pstmt.setString(1, produto.getNome_item());
             pstmt.setInt(2, (int) produto.getPreco());
-            pstmt.setInt(3, produto.getId_item());
+            pstmt.setInt(3, produto.getId_operador());
+            pstmt.setInt(4, produto.getId_item());
             pstmt.execute();
             System.out.println(pstmt);
             

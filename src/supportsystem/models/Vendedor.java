@@ -55,5 +55,4 @@ public class Vendedor {
     
     public Vendedor(){
     }
-
 }

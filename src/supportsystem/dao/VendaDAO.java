@@ -19,13 +19,17 @@ public class VendaDAO {
         db.getConnection().setAutoCommit(false);
         try {
 
-            pstmt = db.getConnection().prepareStatement("INSERT INTO venda (id_cliente, id_vendedor, nome_cliente, nome_vendedor, nome_item, vl_total_venda) values (?, ?, ?, ?, ?, ?)");
+            pstmt = db.getConnection().prepareStatement("INSERT INTO venda "
+                    + "(id_cliente, id_vendedor, nome_cliente, nome_vendedor, nome_item, vl_total_venda, id_operador)"
+                    + "values (?, ?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, vendadto.getId_cliente());
             pstmt.setInt(2, vendadto.getId_vendedor());
             pstmt.setString(3, vendadto.getNome_cliente());
             pstmt.setString(4, vendadto.getNome_vendedor());
             pstmt.setString(5, vendadto.getNome_item());
             pstmt.setFloat(6, vendadto.getValor_venda());
+            pstmt.setInt(7, vendadto.getId_operador());
+
 
             pstmt.execute();
 

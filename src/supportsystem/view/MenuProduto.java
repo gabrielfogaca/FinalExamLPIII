@@ -192,6 +192,8 @@ public class MenuProduto extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadProduto frame = new CadProduto();
+        frame.idusuario = idusuario;
+        frame.loginusuario = loginusuario;
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -215,6 +217,8 @@ public class MenuProduto extends javax.swing.JFrame {
        EditProduto frame = new EditProduto();
         try {
             frame.idProduto = (int) tabelaProdutos.getValueAt(tabelaProdutos.getSelectedRow() , 0);
+            frame.idusuario = idusuario;
+            frame.loginusuario = loginusuario;
             frame.setVisible(true);
         } catch(Exception e) {
          JOptionPane.showMessageDialog(null, "Selecione um produto para editar!");  

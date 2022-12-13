@@ -14,11 +14,14 @@ import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ClienteDTO;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.ProdutoDTO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.dao.VendedorDAO;
 import supportsystem.dao.VendedorDTO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
+import supportsystem.models.Usuario;
 import supportsystem.models.Vendedor;
 
 /**
@@ -31,6 +34,7 @@ public class EditProduto extends javax.swing.JFrame {
      * Creates new form CadCliente
      */
     private Produto produto;
+    private Usuario usuario;
     
     public EditProduto() {
         initComponents();
@@ -38,6 +42,9 @@ public class EditProduto extends javax.swing.JFrame {
 
     public int idProduto;
 
+    
+    public int idusuario;
+    public String loginusuario;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +63,8 @@ public class EditProduto extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cbxNovoPreco = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,44 +116,68 @@ public class EditProduto extends javax.swing.JFrame {
 
         jLabel5.setText("Novo Preço:");
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel6.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(31, 31, 31)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbxNovoNomeProduto))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbxNovoPreco))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(cbxNomeVendedoratual, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jLabel1)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(157, 157, 157)
+                            .addComponent(btnEditCliente)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxNovoNomeProduto))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxNovoPreco))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbxNomeVendedoratual, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(btnEditCliente)))
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +191,7 @@ public class EditProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(cbxNovoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btnEditCliente)
                 .addGap(19, 19, 19))
         );
@@ -175,6 +208,7 @@ public class EditProduto extends javax.swing.JFrame {
             produto.setId_item(idProduto);
             produto.setNome_item(cbxNovoNomeProduto.getText());
             produto.setPreco(Integer.parseInt(cbxNovoPreco.getText()));
+            produto.setId_operador(idusuario);
             
             produtoDAO.editarProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto editado com sucesso!");
@@ -229,9 +263,33 @@ public class EditProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxNovoNomeProdutoActionPerformed
 
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+        try {
+            Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+            this.usuario = Uusuario;
+            idusuario = Uusuario.getId_usuario();
+        } catch (SQLException ex) {
+            //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+        };
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
+
     private void PopulateFields(Produto Pproduto){
         cbxNomeVendedoratual.setText(Pproduto.getNome_item());
         
+    }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,6 +302,8 @@ public class EditProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelNomeUsuario;
     // End of variables declaration//GEN-END:variables
 
 }

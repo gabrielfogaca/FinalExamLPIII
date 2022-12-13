@@ -70,6 +70,12 @@ public class EditCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Novo nome:");
 
+        cbxNomeCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxNomeClienteActionPerformed(evt);
+            }
+        });
+
         btnEditCliente.setText("Editar");
         btnEditCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +205,6 @@ public class EditCliente extends javax.swing.JFrame {
             cliente.setId_cliente(idCliente);
             cliente.setNome_cliente(cbxNomeCliente.getText());
             cliente.setId_operador(idusuario);
-            System.out.println(idusuario);
             if (rbtnTipoPf.isSelected()) {
                 cliente.setId_tipo_cliente(1);
             } else if (rbtnTipoPj.isSelected()) {
@@ -269,6 +274,10 @@ public class EditCliente extends javax.swing.JFrame {
         } catch (Exception e) {  
         }
     }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
+
+    private void cbxNomeClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxNomeClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxNomeClienteActionPerformed
 
     private void PopulateFields(Cliente Ccliente){
         cbxNomeClienteatual.setText(Ccliente.getNome_cliente());

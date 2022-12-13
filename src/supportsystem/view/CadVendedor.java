@@ -8,9 +8,12 @@ package supportsystem.view;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import supportsystem.dao.ClienteDAO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.dao.VendedorDAO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
+import supportsystem.models.Usuario;
 import supportsystem.models.Vendedor;
 
 /**
@@ -19,6 +22,8 @@ import supportsystem.models.Vendedor;
  */
 public class CadVendedor extends javax.swing.JFrame {
 
+    private Usuario usuario;
+
     /**
      * Creates new form CadCliente
      */
@@ -26,6 +31,10 @@ public class CadVendedor extends javax.swing.JFrame {
         initComponents();
     }
 
+    
+        
+    public int idusuario;
+    public String loginusuario;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +51,8 @@ public class CadVendedor extends javax.swing.JFrame {
         btnCadVendedor = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbxPcComissao = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,6 +81,20 @@ public class CadVendedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Usuario:");
+
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -90,15 +115,24 @@ public class CadVendedor extends javax.swing.JFrame {
                                 .addComponent(cbxPcComissao, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
-                        .addComponent(btnCadVendedor)))
+                        .addComponent(btnCadVendedor))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(52, 52, 52)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbxNomeVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -106,7 +140,7 @@ public class CadVendedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbxPcComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(btnCadVendedor)
                 .addGap(19, 19, 19))
         );
@@ -122,6 +156,7 @@ public class CadVendedor extends javax.swing.JFrame {
             
             vendedor.setNome_vendedor(cbxNomeVendedor.getText());
             vendedor.setPc_comissao(Integer.parseInt(cbxPcComissao.getText()));
+            vendedor.setId_operador(idusuario);
             
             vendedorDao.inserirVendedor(vendedor);
             JOptionPane.showMessageDialog(null, "Vendedor inserido com sucesso!");
@@ -143,6 +178,26 @@ public class CadVendedor extends javax.swing.JFrame {
             evt.consume();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_cbxPcComissaoKeyTyped
+
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+        try {
+            Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+            this.usuario = Uusuario;
+            idusuario = Uusuario.getId_usuario();
+        } catch (SQLException ex) {
+            //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+        };
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -179,6 +234,10 @@ public class CadVendedor extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadVendedor;
@@ -188,5 +247,7 @@ public class CadVendedor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }

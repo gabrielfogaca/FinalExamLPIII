@@ -50,9 +50,10 @@ public class VendedorDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("INSERT INTO vendedor (nome_vendedor, pc_comissao) VALUES (?, ?)");
+            pstmt = db.getConnection().prepareStatement("INSERT INTO vendedor (nome_vendedor, pc_comissao, id_operador) VALUES (?, ?,?)");
             pstmt.setString(1, vendedor.getNome_vendedor());
             pstmt.setInt(2,vendedor.getPc_comissao());
+            pstmt.setInt(3,vendedor.getId_operador());
             pstmt.execute();
 
         } catch (SQLException ex) {
@@ -113,15 +114,18 @@ public class VendedorDAO {
         ResultSet rs = null;
 
         try {
-            pstmt = db.getConnection().prepareStatement("update vendedor set nome_vendedor = ?, pc_comissao = ? where id_vendedor = ?");
+            pstmt = db.getConnection().prepareStatement("update vendedor set nome_vendedor = ?, pc_comissao = ?, id_operador = ? where id_vendedor = ?");
             pstmt.setString(1, vendedor.getNome_vendedor());
             pstmt.setInt(2, vendedor.getPc_comissao());
-            pstmt.setInt(3, vendedor.getId_vendedor());
+            pstmt.setInt(3, vendedor.getId_operador());
+            pstmt.setInt(4, vendedor.getId_vendedor());
+            System.out.println(vendedor.getId_operador());
+            
             pstmt.execute();
             
         } catch (SQLException ex) {
             System.out.println(ex);
-            LogController.createLog("Erro ao conectar-se na tabela CLIENTE do banco de dados. " + ex.getMessage(), "S");
+            LogController.createLog("Erro ao conectar-se na tabela vendedor do banco de dados. " + ex.getMessage(), "S");
         } finally {
             db.close();
         }

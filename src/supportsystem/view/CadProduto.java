@@ -12,8 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import supportsystem.createXML.LerValoresXML;
 import supportsystem.dao.ProdutoDAO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Produto;
+import supportsystem.models.Usuario;
 
 /**
  *
@@ -21,12 +24,17 @@ import supportsystem.models.Produto;
  */
 public class CadProduto extends javax.swing.JFrame {
 
+    private Usuario usuario;
+
     /**
      * Creates new form CadCliente
      */
     public CadProduto() {
         initComponents();
     }
+    
+    public int idusuario;
+    public String loginusuario;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +55,8 @@ public class CadProduto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbxQuantidadeProduto = new javax.swing.JTextField();
         btnCadProdutoXML = new javax.swing.JButton();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("SupportSystem - Cadastro de Produtos");
@@ -86,6 +96,20 @@ public class CadProduto extends javax.swing.JFrame {
             }
         });
 
+        jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        jLabelNomeUsuario.setText(" ");
+        jLabelNomeUsuario.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabelNomeUsuarioAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        jLabel6.setText("Usuario:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,11 +144,21 @@ public class CadProduto extends javax.swing.JFrame {
                     .addComponent(btnCadProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadProdutoXML))
                 .addGap(141, 141, 141))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -142,7 +176,7 @@ public class CadProduto extends javax.swing.JFrame {
                 .addComponent(btnCadProdutoXML)
                 .addGap(18, 18, 18)
                 .addComponent(btnCadProduto)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +191,7 @@ public class CadProduto extends javax.swing.JFrame {
             produto.setNome_item(cbxNomeProduto.getText());
             produto.setPreco(Float.parseFloat(cbxPrecoProduto.getText()));
             produto.setQtd(Integer.parseInt(cbxQuantidadeProduto.getText()));
+            produto.setId_operador(idusuario);
 
             produtodao.inserirProduto(produto);
             JOptionPane.showMessageDialog(null, "Produto inserido com sucesso!");
@@ -202,6 +237,26 @@ public class CadProduto extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "XML Carregado!");
     }//GEN-LAST:event_btnCadProdutoXMLActionPerformed
 
+    private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
+        jLabelNomeUsuario.removeAll();
+        String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+        try {
+            Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+            this.usuario = Uusuario;
+            idusuario = Uusuario.getId_usuario();
+        } catch (SQLException ex) {
+            //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+        };
+        try {
+            PopulateAuth(usuario);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +292,10 @@ public class CadProduto extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void PopulateAuth(String usuario){
+        jLabelNomeUsuario.setText(loginusuario);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadProduto;
@@ -249,5 +308,7 @@ public class CadProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelNomeUsuario;
     // End of variables declaration//GEN-END:variables
 }

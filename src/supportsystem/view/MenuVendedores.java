@@ -207,6 +207,8 @@ public class MenuVendedores extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CadVendedor frame = new CadVendedor();
+        frame.idusuario = idusuario;
+        frame.loginusuario = loginusuario;
         LogController.createLog("Abrindo página de cadastro de vendedor", "I");
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -231,6 +233,8 @@ public class MenuVendedores extends javax.swing.JFrame {
         EditVendedor frame = new EditVendedor();
         try {
             frame.idVendedor = (int) tabelaVendedores.getValueAt(tabelaVendedores.getSelectedRow() , 0);
+            frame.idusuario = idusuario;
+            frame.loginusuario = loginusuario;
             frame.setVisible(true);
         } catch(Exception e) {
          JOptionPane.showMessageDialog(null, "Selecione um vendedor para editar!");  

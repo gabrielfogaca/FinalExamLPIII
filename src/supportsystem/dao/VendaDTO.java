@@ -9,6 +9,7 @@ public class VendaDTO {
     private String nome_item;
     private float valor_venda;
     private int qtd_estoque;
+    private int id_operador;
 
     public int getId_cliente() {
         return id_cliente;
@@ -80,6 +81,14 @@ public class VendaDTO {
 
     public void setQtd_estoque(int qtd_estoque) {
         this.qtd_estoque = qtd_estoque;
+    }
+
+    public int getId_operador() {
+        return id_operador;
+    }
+
+    public void setId_operador(int id_operador) {
+        this.id_operador = id_operador;
     }
     
 }

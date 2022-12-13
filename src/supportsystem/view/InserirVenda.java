@@ -13,12 +13,15 @@ import javax.swing.table.DefaultTableModel;
 import supportsystem.dao.ClienteDAO;
 import supportsystem.dao.ProdutoDAO;
 import supportsystem.dao.ProdutoDTO;
+import supportsystem.dao.UsuarioDAO;
+import supportsystem.dao.UsuarioDTO;
 import supportsystem.dao.VendaDAO;
 import supportsystem.dao.VendaDTO;
 import supportsystem.dao.VendedorDAO;
 import supportsystem.logging.LogController;
 import supportsystem.models.Cliente;
 import supportsystem.models.Produto;
+import supportsystem.models.Usuario;
 import supportsystem.models.Vendedor;
 
 /**
@@ -26,6 +29,8 @@ import supportsystem.models.Vendedor;
  * @author João
  */
 public class InserirVenda extends javax.swing.JFrame {
+
+    private Usuario usuario;
 
     /**
      * Creates new form Interface
@@ -285,6 +290,7 @@ public class InserirVenda extends javax.swing.JFrame {
         vendadto.setNome_item(nome_item);
         vendadto.setValor_venda(valor_total);
         vendadto.setQuantidade_produto(qtd_estoque);
+        vendadto.setId_operador(idusuario);
 
         VendaDAO vendadao = new VendaDAO();
         try {
@@ -313,10 +319,20 @@ public class InserirVenda extends javax.swing.JFrame {
     private void jLabelNomeUsuarioAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabelNomeUsuarioAncestorAdded
         jLabelNomeUsuario.removeAll();
         String usuario = loginusuario;
+        UsuarioDTO usuariodto = new UsuarioDTO();
+            
+        UsuarioDAO usuariodao = new UsuarioDAO();
+
+            try {
+                Usuario Uusuario = usuariodao.buscarIDusuario(loginusuario);
+                this.usuario = Uusuario;
+                idusuario = Uusuario.getId_usuario();
+            } catch (SQLException ex) {
+                //Logger.getLogger(InserirVenda.class.getName()).log(Level.SEVERE, null, ex);
+            };
         try {
             PopulateAuth(usuario);
-        } catch (Exception e) {
-            
+        } catch (Exception e) {  
         }
     }//GEN-LAST:event_jLabelNomeUsuarioAncestorAdded
     /**

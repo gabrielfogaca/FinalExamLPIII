@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Support System - Menu Clientes");
+        setTitle("Support System - Login");
         setResizable(false);
 
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
@@ -183,6 +183,7 @@ public class Login extends javax.swing.JFrame {
                 MenuPrincipal frame = new MenuPrincipal();
                 frame.idusuario = usuario.getId_usuario();
                 frame.loginusuario = usuario.getLogin();
+                System.out.println(usuario.getLogin());
                 LogController.createLog("Login realizado com sucesso", "I");
                 frame.setVisible(true);
                 dispose();

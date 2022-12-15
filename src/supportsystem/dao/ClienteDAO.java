@@ -128,21 +128,21 @@ public class ClienteDAO {
     }
      
      
-     public Cliente ProcurarClienteParaTeste(int clienteid) throws SQLException {
+    public Cliente ProcurarClienteParaTeste(int idcliente) throws SQLException {
         DataBase db = new DataBase();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
             pstmt = db.getConnection().prepareStatement("select * from cliente where id_cliente = ?");
-            pstmt.setInt(1,clienteid);
+            pstmt.setInt(1, idcliente);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
 
-            Cliente testeCliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"), rs.getInt("id_operador"));
+            Cliente Ccliente = new Cliente(rs.getInt("id_cliente"), rs.getString("nome_cliente"), rs.getInt("id_tipo_cliente"), rs.getInt("id_operador"));
             
-            return testeCliente;
+            return Ccliente;
             
             }
             

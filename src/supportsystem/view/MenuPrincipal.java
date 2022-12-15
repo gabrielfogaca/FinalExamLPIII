@@ -61,7 +61,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabelNomeUsuario.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabelNomeUsuario.setText(" ");
 
-        jButton2.setText("Cadastrar Vendedores");
+        jButton2.setText("Menu de Vendedores");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -140,8 +140,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabelNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cbxUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
@@ -284,8 +283,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cbxNomeClienteatual;
-    private javax.swing.JTextField cbxNomeClienteatual1;
     private javax.swing.JTextField cbxUsuarioLogado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -300,11 +297,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private boolean VerificarAuth() {
         Integer authenticationid = idusuario;
+        System.out.println(authenticationid);
         String authenticationlogin = loginusuario;
-        if (authenticationid != null && authenticationlogin != null) {
+        if (authenticationlogin != null) {
                return true;
         } else {
-            dispose();
+               dispose();
         }
         return false;
     }
